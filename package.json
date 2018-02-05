@@ -6,7 +6,7 @@
   },
   "bin": "./src/cli.js",
   "bugs": "https://github.com/factset/deprecator/issues",
-  "description": "",
+  "description": "Deprecate npm package versions based on rule matching.",
   "engines": {
     "node": ">=4.2.0",
     "npm": ">=2.1.9"
@@ -34,7 +34,12 @@
   "version": "1.0.0",
   "dependencies": {
     "commander": "^2.12.2",
-    "debug": "^3.1.0"
+    "debug": "^3.1.0",
+    "glob": "^7.1.2",
+    "got": "^8.0.1",
+    "registry-url": "^3.1.0",
+    "semver": "^5.5.0",
+    "shelljs": "^0.8.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -46,6 +51,9 @@
     "nock": "^9.1.4",
     "npm-publish-git-tag": "^1.1.14",
     "nyc": "^11.3.0",
-    "semantic-release-github": "^3.0.2"
+    "semantic-release-github": "^3.0.2",
+    "sinon": "^4.2.2",
+    "sinon-chai": "^2.14.0",
+    "tmp": "^0.0.33"
   }
 }
