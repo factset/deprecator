@@ -28,9 +28,9 @@ Versions of a package are selected for deprecation based on matching each versio
 
 ## Features
 
-* [&#x2713;] [`npm`](https://npmjs.com)-compatible registry support.
-  * [&#x2713;] Multiple version deprecation support.
-  * [&#x2713;] Mono repositories.
+* [x] [`npm`](https://npmjs.com)-compatible registry support.
+  * [x] Multiple version deprecation support.
+  * [x] Mono repositories.
 
 ## Installation
 
