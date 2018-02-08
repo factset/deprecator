@@ -17,7 +17,7 @@ function deprecator(shell) {
         debug(`deprecation configuration - %O`, config);
         return config;
       })
-      .then(config => projects(shell)({autoDiscover: config.autoDiscover}))
+      .then(config => projects(shell)({autoDiscover: config.autoDiscover, dryRun: config.dryRun}))
       .then(projects => Promise.all(projects.map(project => project.fetch())))
       .then(projects => Promise.all(projects.map(project => project.deprecate(config.rules))))
       .then(condenseDeprecationInformation);

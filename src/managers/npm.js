@@ -16,7 +16,8 @@ const RULE_METHODS = {
 };
 
 function npmFactory(shell) {
-  function npm(packageFileContents) {
+  function npm(dryRun, packageFileContents) {
+    this.dryRun = dryRun;
     this.packageName = JSON.parse(packageFileContents).name;
 
     debug(`package name is - ${this.packageName}`);
@@ -65,14 +66,15 @@ function npmFactory(shell) {
         }
       });
 
-    const deprecatePromises = Object
-      .keys(filteredMetadata.versions)
+    const versions = Object.keys(filteredMetadata.versions);
+
+    const deprecatePromises = versions
       .map(key => filteredMetadata.versions[key])
 
       // Retrieve only those versions that have not already been deprecated.
-      .filter(meta => {
-        if (meta.deprecated !== undefined) {
-          debug(`ignoring version '${meta.version}' as it has already been deprecated with message - "${meta.deprecated}"`);
+      .filter(versionMetadata => {
+        if (versionMetadata.deprecated !== undefined) {
+          debug(`ignoring version '${versionMetadata.version}' as it has already been deprecated with message - "${versionMetadata.deprecated}"`);
           return false;
         }
 
@@ -80,24 +82,28 @@ function npmFactory(shell) {
       })
 
       // Filter versions based on whether they match our deprecation rules.
-      .filter(meta => rules.some(rule => rule(meta)))
+      .filter(versionMetadata => rules.some(rule => rule(versions, versionMetadata)))
 
       // Call `npm deprecate` on each version that needs to be deprecated.
-      .map(meta => {
-        debug(`calling 'deprecate' on version '${meta.version}'`);
+      .map(versionMetadata => {
+        debug(`calling 'deprecate' on version '${versionMetadata.version}'`);
 
-        return new Promise((resolve, reject) => {
+        if (this.dryRun) {
+          debug(`running in 'dry-run' mode so no deprecation will actually happen`);
+        }
+
+        return this.dryRun ? Promise.resolve(versionMetadata) : new Promise((resolve, reject) => {
           function callback(code, stdout, stderr) {
             debug(`results of 'npm deprecate' - code = "${code}", stdout = "${stdout}", stderr = "${stderr}"`);
 
             if (code !== 0) {
-              return reject(new Error(`Failed to deprecate ${this.packageName}@${meta.version} - ${stderr}`));
+              return reject(new Error(`Failed to deprecate ${this.packageName}@${versionMetadata.version} - ${stderr}`));
             }
 
-            return resolve(meta);
+            return resolve(versionMetadata);
           }
 
-          shell.exec(`npm deprecate ${this.packageName}@${meta.version} "This version is no longer supported. Please upgrade."`, {silent: true}, callback.bind(this));
+          shell.exec(`npm deprecate ${this.packageName}@${versionMetadata.version} "This version is no longer supported. Please upgrade."`, {silent: true}, callback.bind(this));
         });
       });
 

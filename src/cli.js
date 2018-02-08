@@ -11,10 +11,15 @@ program
   .description(pkg.description)
   .version(pkg.version)
   .option(`-r, --rules <rule,...>`, `Comma-separated list of rule names to determine which versions to deprecate`, val => val.split(`,`))
+  .option(`-d --dry-run`, `Run as if deprecating versions of a package, but don't actually deprecate anything.`)
   .parse(process.argv)
 ;
 
-deprecator({rules: program.rules || []})
+deprecator({
+  autoDiscover: program.autoDiscover,
+  dryRun: program.dryRun,
+  rules: program.rules || [],
+})
   .then(deprecatedVersions => Object.keys(deprecatedVersions).length === 0 ?
     `No versions needed to be deprecated.` :
     `We have deprecated the following versions - ${JSON.stringify(deprecatedVersions)}`)

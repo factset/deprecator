@@ -21,6 +21,6 @@ function projects(shell) {
     // Assume local project folder that may have a single package, or multiple package (monorepo).
     return fileHandler
       .loadFiles(npmPatterns)
-      .then(filesContent => filesContent.map(fileContent => new (npm(shell))(fileContent)));
+      .then(filesContent => filesContent.map(fileContent => new (npm(shell))(config.dryRun, fileContent)));
   };
 }

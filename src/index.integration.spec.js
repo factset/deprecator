@@ -112,10 +112,21 @@ describe(`deprecator`, function () {
         .then(() => scope.done());
     });
 
-    it(`resolve and does nothing with 'autoDiscover' enabled`, function () {
+    it(`resolves and does nothing with 'autoDiscover' enabled`, function () {
       return expect(this.deprecator({autoDiscover: true, rules: [`all`]}))
         .to.be.fulfilled
+        .then(results => expect(results).to.deep.equal({}))
         .then(() => expect(this.shell.exec).to.not.have.been.called);
+    });
+
+    it(`resolves and pretends to deprecate packages with 'dryRun' enabled`, function () {
+      const scope = setupNpmNock(packageData);
+
+      return expect(this.deprecator({dryRun: true, rules: [`all`]}))
+        .to.be.fulfilled
+        .then(results => expect(results).to.deep.equal({deprecator: [`2.0.0`, `3.0.0`]}))
+        .then(() => expect(this.shell.exec).to.not.have.been.called)
+        .then(() => scope.done());
     });
   });
 });
