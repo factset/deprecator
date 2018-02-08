@@ -1,4 +1,4 @@
-'use stirct';
+'use strict';
 
 const debug = require(`debug`)(`deprecator`);
 const got = require(`got`);
