@@ -51,25 +51,8 @@ function npmFactory(shell) {
       return [];
     }
 
-    // Clone for local modifications.
-    const filteredMetadata = Object.assign({}, this.metadata);
-
-    // Assign the version publish time to each version's metadata object.
-    Object
-      .keys(filteredMetadata.time)
-      .filter(version => semver.valid(version) !== null)
-      .forEach(version => {
-        if (filteredMetadata.versions[version] === undefined) {
-          debug(`did not find version '${version}' in the project's package metadata`);
-        } else {
-          filteredMetadata.versions[version]._time = filteredMetadata.time[version];
-        }
-      });
-
-    const versions = Object.keys(filteredMetadata.versions);
-
-    const deprecatePromises = versions
-      .map(key => filteredMetadata.versions[key])
+    const deprecatePromises = Object
+      .values(this.metadata.versions)
 
       // Retrieve only those versions that have not already been deprecated.
       .filter(versionMetadata => {
@@ -82,7 +65,7 @@ function npmFactory(shell) {
       })
 
       // Filter versions based on whether they match our deprecation rules.
-      .filter(versionMetadata => rules.some(rule => rule(versions, versionMetadata)))
+      .filter(versionMetadata => rules.some(rule => rule(this.metadata.versions, versionMetadata)))
 
       // Call `npm deprecate` on each version that needs to be deprecated.
       .map(versionMetadata => {
@@ -107,12 +90,23 @@ function npmFactory(shell) {
         });
       });
 
-    return Promise
-      .all(deprecatePromises);
+    return Promise.all(deprecatePromises);
   };
 
   npm.prototype.saveMetadata = function (metadata) {
     this.metadata = metadata;
+
+    // Assign the version publish time to each version's metadata object.
+    Object
+      .keys(this.metadata.time)
+      .filter(version => semver.valid(version) !== null)
+      .forEach(version => {
+        if (this.metadata.versions[version] === undefined) {
+          debug(`did not find version '${version}', specified in 'time' list, in the project's package metadata`);
+        } else {
+          this.metadata.versions[version]._time = this.metadata.time[version];
+        }
+      });
   };
 
   npm.packageMetadataFilePattern = {
