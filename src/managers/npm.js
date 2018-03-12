@@ -5,15 +5,25 @@ const got = require(`got`);
 const registryUrl = require(`registry-url`);
 const semver = require(`semver`);
 const shell = require(`shelljs`);
-
 const url = require(`url`);
 
 module.exports = npmFactory(shell);
 module.exports.npm = npmFactory;
+module.exports.rules = getRules();
 
-const RULE_METHODS = {
-  all: () => true,
-};
+function getRules() {
+  return {
+    all: (/* metadata, option */) => (/* versionMetadata */) => true,
+    majorVersions: (metadata, option) => {
+      const latestMajor = semver.major(metadata[`dist-tags`].latest);
+      const date = new Date();
+      date.setMonth(date.getMonth() - Number(option));
+
+      return versionMetadata => (semver.major(versionMetadata.version) < latestMajor) &&
+        (new Date(versionMetadata._time) < date);
+    },
+  };
+}
 
 function npmFactory(shell) {
   function npm(dryRun, packageFileContents) {
@@ -38,18 +48,19 @@ function npmFactory(shell) {
   };
 
   npm.prototype.deprecate = function (chosenRules) {
-    chosenRules.forEach(ruleName => {
-      if (RULE_METHODS[ruleName] === undefined) {
+    if (Object.keys(chosenRules).length === 0) {
+      debug(`no rules to apply so exiting the deprecation process early`);
+      return [];
+    }
+
+    Object.keys(chosenRules).forEach(ruleName => {
+      if (module.exports.rules[ruleName] === undefined) {
         throw Error(`The following rule is not supported by the 'npm' manager - ${ruleName}`);
       }
     });
 
-    const rules = chosenRules.map(enabledRule => RULE_METHODS[enabledRule]);
-
-    if (rules.length === 0) {
-      debug(`no rules to apply so exiting the deprecation process early`);
-      return [];
-    }
+    const rules = Object.keys(chosenRules)
+      .map(ruleName => module.exports.rules[ruleName](this.metadata, chosenRules[ruleName]));
 
     const deprecatePromises = Object
       .values(this.metadata.versions)
@@ -65,7 +76,7 @@ function npmFactory(shell) {
       })
 
       // Filter versions based on whether they match our deprecation rules.
-      .filter(versionMetadata => rules.some(rule => rule(this.metadata.versions, versionMetadata)))
+      .filter(versionMetadata => rules.some(rule => rule(versionMetadata)))
 
       // Call `npm deprecate` on each version that needs to be deprecated.
       .map(versionMetadata => {

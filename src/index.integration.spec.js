@@ -55,13 +55,13 @@ describe(`deprecator`, function () {
 
     it(`fails when rules aren't provided`, function () {
       return expect(this.deprecator({}))
-        .to.be.rejectedWith(Error, `Must provide a 'rules' property as an array in the configuration.`);
+        .to.be.rejectedWith(Error, `Must provide a 'rules' property as an object in the configuration.`);
     });
 
     it(`won't deprecate package versions with empty rule list`, function () {
       const scope = setupNpmNock(packageData);
 
-      return expect(this.deprecator({rules: []}))
+      return expect(this.deprecator({rules: {}}))
         .to.be.fulfilled
         .to.to.eventually.deep.equal({})
         .then(() => expect(this.shell.exec).to.not.have.been.called)
@@ -71,7 +71,7 @@ describe(`deprecator`, function () {
     it(`rejects when an invalid rule is provided`, function () {
       const scope = setupNpmNock(packageData);
 
-      return expect(this.deprecator({rules: [`invalid`]}))
+      return expect(this.deprecator({rules: {invalid: null}}))
         .to.be.rejectedWith(Error, `The following rule is not supported by the 'npm' manager - invalid`)
         .then(() => expect(this.shell.exec).to.not.have.been.called)
         .then(() => scope.done());
@@ -80,7 +80,7 @@ describe(`deprecator`, function () {
     it(`deprecates all versions of the package`, function () {
       const scope = setupNpmNock(packageData);
 
-      return expect(this.deprecator({rules: [`all`]}))
+      return expect(this.deprecator({rules: {all: null}}))
         .to.be.fulfilled
         .and.to.eventually.deep.equal({deprecator: [`2.0.0`, `3.0.0`]})
         .then(() => expect(this.shell.exec).to.have.been.calledTwice)
@@ -92,7 +92,7 @@ describe(`deprecator`, function () {
     it(`skips deprecating a version if the registry is missing the version's metadata`, function () {
       const scope = setupNpmNock(corruptedPackageData);
 
-      return expect(this.deprecator({rules: [`all`]}))
+      return expect(this.deprecator({rules: {all: null}}))
         .to.be.fulfilled
         .to.to.eventually.deep.equal({deprecator: [`3.0.0`]})
         .then(() => expect(this.shell.exec).to.have.been.calledOnce
@@ -104,7 +104,7 @@ describe(`deprecator`, function () {
       const scope = setupNpmNock(packageData);
       this.shell.exec.yields(1, ``, `npm failed`);
 
-      return expect(this.deprecator({rules: [`all`]}))
+      return expect(this.deprecator({rules: {all: null}}))
         .to.be.rejectedWith(Error, `Failed to deprecate deprecator@2.0.0 - npm failed`)
         .then(() => expect(this.shell.exec).to.have.been.calledTwice)
         .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.0 "This version is no longer supported. Please upgrade."`))
@@ -113,7 +113,7 @@ describe(`deprecator`, function () {
     });
 
     it(`resolves and does nothing with 'autoDiscover' enabled`, function () {
-      return expect(this.deprecator({autoDiscover: true, rules: [`all`]}))
+      return expect(this.deprecator({autoDiscover: true, rules: {all: null}}))
         .to.be.fulfilled
         .then(results => expect(results).to.deep.equal({}))
         .then(() => expect(this.shell.exec).to.not.have.been.called);
@@ -122,7 +122,7 @@ describe(`deprecator`, function () {
     it(`resolves and pretends to deprecate packages with 'dryRun' enabled`, function () {
       const scope = setupNpmNock(packageData);
 
-      return expect(this.deprecator({dryRun: true, rules: [`all`]}))
+      return expect(this.deprecator({dryRun: true, rules: {all: null}}))
         .to.be.fulfilled
         .then(results => expect(results).to.deep.equal({deprecator: [`2.0.0`, `3.0.0`]}))
         .then(() => expect(this.shell.exec).to.not.have.been.called)

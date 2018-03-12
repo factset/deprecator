@@ -18,7 +18,7 @@ program
 deprecator({
   autoDiscover: program.autoDiscover,
   dryRun: program.dryRun,
-  rules: program.rules || [],
+  rules: processRuleString(program.rules),
 })
   .then(deprecatedVersions => Object.keys(deprecatedVersions).length === 0 ?
     `No versions needed to be deprecated.` :
@@ -29,3 +29,11 @@ deprecator({
     console.error(`deprecator failed for the following reason - ${error}`);
     process.exit(1);
   });
+
+function processRuleString(rules) {
+  return rules ? rules.reduce((previous, rule) => {
+    const split = rule.split(`=`);
+    previous[split[0]] = split[1] || null;
+    return previous;
+  }, {}) : {};
+}

@@ -9,8 +9,7 @@ module.exports = deprecator(shell);
 module.exports.deprecator = deprecator;
 
 function deprecator(shell) {
-  return config => Array.isArray(config.rules) === false ?
-    Promise.reject(new Error(`Must provide a 'rules' property as an array in the configuration.`)) :
+  return config => config.rules === Object(config.rules) ?
     Promise.resolve(config)
       .then(config => {
         config = Object.assign({}, config, {});
@@ -20,5 +19,6 @@ function deprecator(shell) {
       .then(config => projects(shell)({autoDiscover: config.autoDiscover, dryRun: config.dryRun}))
       .then(projects => Promise.all(projects.map(project => project.fetch())))
       .then(projects => Promise.all(projects.map(project => project.deprecate(config.rules))))
-      .then(condenseDeprecationInformation);
+      .then(condenseDeprecationInformation) :
+    Promise.reject(new Error(`Must provide a 'rules' property as an object in the configuration.`));
 }
