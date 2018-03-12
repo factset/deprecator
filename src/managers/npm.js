@@ -62,8 +62,7 @@ function npmFactory(shell) {
     const rules = Object.keys(chosenRules)
       .map(ruleName => module.exports.rules[ruleName](this.metadata, chosenRules[ruleName]));
 
-    const deprecatePromises = Object
-      .values(this.metadata.versions)
+    const deprecatePromises = Object.keys(this.metadata.versions).map(key => this.metadata.versions[key])
 
       // Retrieve only those versions that have not already been deprecated.
       .filter(versionMetadata => {
