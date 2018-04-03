@@ -8,6 +8,7 @@ const fs = require(`fs`);
 const index = require(`./index`).deprecator;
 const mocha = require(`mocha`);
 const nock = require(`nock`);
+const path = require(`path`);
 const sinon = require(`sinon`);
 const sinonChai = require(`sinon-chai`);
 const tmp = require(`tmp`);
@@ -51,6 +52,7 @@ describe(`deprecator`, function () {
   describe(`npm manager`, () => {
     beforeEach(function () {
       fs.writeFileSync(`package.json`, `{"name":"deprecator"}`);
+      fs.copyFileSync(path.join(this.cwd, `.npmrc`), path.join(this.tmpDir.name, `.npmrc`));
     });
 
     it(`fails when rules aren't provided`, function () {
@@ -132,7 +134,7 @@ describe(`deprecator`, function () {
 });
 
 function setupNpmNock(packageData) {
-  return nock(`https://registry.npmjs.org`)
+  return nock(`https://registry.yarnpkg.com`)
     .get(`/deprecator`)
     .reply(200, JSON.stringify(packageData()));
 }

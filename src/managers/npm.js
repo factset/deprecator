@@ -4,10 +4,10 @@ const debug = require(`debug`)(`deprecator`);
 const got = require(`got`);
 const registryUrl = require(`registry-url`);
 const semver = require(`semver`);
-const shell = require(`shelljs`);
+const shelljs = require(`shelljs`);
 const url = require(`url`);
 
-module.exports = npmFactory(shell);
+module.exports = npmFactory();
 module.exports.npm = npmFactory;
 module.exports.rules = getRules();
 
@@ -25,7 +25,9 @@ function getRules() {
   };
 }
 
-function npmFactory(shell) {
+function npmFactory(customShell) {
+  const shell = customShell || shelljs;
+
   function npm(dryRun, packageFileContents) {
     this.dryRun = dryRun;
     this.packageName = JSON.parse(packageFileContents).name;
@@ -79,11 +81,7 @@ function npmFactory(shell) {
 
       // Call `npm deprecate` on each version that needs to be deprecated.
       .map(versionMetadata => {
-        debug(`calling 'deprecate' on version '${versionMetadata.version}'`);
-
-        if (this.dryRun) {
-          debug(`running in 'dry-run' mode so no deprecation will actually happen`);
-        }
+        debug(`calling 'deprecate' on version '${versionMetadata.version}' of '${versionMetadata.name}'${this.dryRun ? ` - running in dry run mode` : ``}`);
 
         return this.dryRun ? Promise.resolve(versionMetadata) : new Promise((resolve, reject) => {
           function callback(code, stdout, stderr) {
@@ -119,10 +117,7 @@ function npmFactory(shell) {
       });
   };
 
-  npm.packageMetadataFilePattern = {
-    pattern: `**/package.json`,
-    ignore: [`node_modules/**`],
-  };
+  npm.packageMetadataFilePattern = `**/package.json`;
 
   return npm;
 }

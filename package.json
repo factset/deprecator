@@ -30,17 +30,24 @@
   "scripts": {
     "dev": "docker run --rm --user node -v \"$(pwd)\":/app -w /app -it node:4 sh -c \"yarn install; yarn test; bash\"",
     "start": "node src/server.js",
-    "schedule": "node src/schedule.js",
-    "test": "eslint src/ && nyc --all --cache --include=src/ --exclude=src/cli.js --exclude=src/**/*.spec.js --exclude=src/**/*.mocks.js --reporter=lcov --reporter=text mocha --check-leaks --full-trace --globals __core-js_shared__,__coverage__,YamlEscaper --inline-diffs --no-exit --recursive --reporter=progress --retries 1 src/**/*.spec.js"
+    "schedule": "node src/scheduler.js",
+    "test": "eslint src/ && nyc --all --cache --include=src/ --exclude=src/cli.js --exclude=src/**/*.spec.js --exclude=src/**/*.mocks.js --reporter=lcov --reporter=text mocha --check-leaks --full-trace --globals __core-js_shared__,__coverage__,YamlEscaper --inline-diffs --no-exit --recursive --reporter=progress --retries 1 src/**/*.spec.js",
+    "worker": "node src/worker.js"
   },
   "version": "1.0.0",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "commander": "^2.12.2",
     "debug": "^3.1.0",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "glob": "^7.1.2",
-    "got": "^8.0.1",
+    "got": "^8.3.0",
+    "jsonwebtoken": "^8.2.0",
+    "lodash": "^4.17.5",
+    "minimatch": "^3.0.4",
+    "redis": "^2.8.0",
     "registry-url": "^3.1.0",
+    "rsmq-worker": "^0.5.2",
     "semver": "^5.5.0",
     "shelljs": "^0.8.1",
     "throng": "^4.0.0"

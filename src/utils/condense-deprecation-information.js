@@ -1,12 +1,8 @@
 'use strict';
 
-const debug = require(`debug`)(`deprecator`);
-
 module.exports = condenseDeprecationInformation;
 
 function condenseDeprecationInformation(deprecatedProjects) {
-  debug(`deprecated projects - %O`, deprecatedProjects);
-
   const condensedDeprecatedProjects = {};
   deprecatedProjects.forEach(projectVersions => {
     projectVersions.forEach(versionMetadata => {

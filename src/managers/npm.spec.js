@@ -126,7 +126,7 @@ describe(`npm`, function () {
     });
 
     it(`deprecates all versions of the package for 'all' rule`, function () {
-      const scope = nock(`https://registry.npmjs.org`)
+      const scope = nock(`https://registry.yarnpkg.com`)
         .get(`/deprecator`)
         .reply(200, JSON.stringify(packageRegistryMetadata));
 
@@ -156,7 +156,7 @@ describe(`npm`, function () {
         modifiedMetadata.time[version] = date.toISOString();
       });
 
-      const scope = nock(`https://registry.npmjs.org`)
+      const scope = nock(`https://registry.yarnpkg.com`)
         .get(`/deprecator`)
         .reply(200, JSON.stringify(modifiedMetadata));
 

@@ -5,8 +5,7 @@ const throng = require(`throng`);
 
 /*
  * Extract number of concurrent processes we should start if we're running in an environment that
- * sets the `WEB_CONCURRENCY` environment variable. Otherwise, default
- * to running with a concurrency of 1.
+ * sets the `WEB_CONCURRENCY` environment variable. Otherwise, default to running with a concurrency of 1.
  */
 const WORKERS = Number(process.env.WEB_CONCURRENCY) || 1;
 
@@ -38,17 +37,19 @@ function start(ID) {
     * connections held by the service to external resources, such as databases, may be closed.
     */
   server.on(`close`, () => {
-    console.log(`[worker-${ID}] All outstanding requests completed, now cleaning up resources before exiting service.`);
+    console.info(`[worker-${ID}] All outstanding requests completed, now cleaning up resources before exiting service.`);
 
-    // Close any connections that may be open to third-party resources, such as databases.
-    // > redis.close();
+    /*
+     * Close any connections that may be open to third-party resources, such as databases.
+     * > redis.close();
+     */
   });
 
   process.on('SIGINT', gracefulShutdown);
   process.on('SIGTERM', gracefulShutdown);
 
   function gracefulShutdown() {
-    console.log(`[worker-${ID}] Waiting for current requests to complete before continuing exit process.`);
+    console.info(`[worker-${ID}] Waiting for current requests to complete before continuing exit process.`);
 
     /*
       * Instruct the Express server to stop accepting new connections, but allow the Express server to remain alive
