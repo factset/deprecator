@@ -62,7 +62,11 @@ function start(workerID) {
           .then(() => getRateLimitRemaining(endpoint, token))
           .then(rateLimit => console.info(`[worker-${workerID}] sample#rate-limit.installation.${installationID}=${rateLimit}`))
           .catch(error => console.error(`[worker-${workerID}] ${error.stack}`));
-      }).then(() => next());
+      })
+      .catch(error => {
+        console.error(`[worker-${workerID}] ${error.stack}`);
+      })
+      .then(() => next());
   });
 
   process.on('SIGTERM', () => {
