@@ -15,7 +15,6 @@ const throng = require(`throng`);
 
 const applicationID = getApplicationID();
 const applicationKey = getApplicationKey();
-const applicationToken = createApplicationToken(applicationID, applicationKey);
 const endpoint = getEndpoint();
 
 /*
@@ -47,6 +46,7 @@ function start(workerID) {
 
   worker.on(`message`, (message, next, taskID) => {
     const start = new Date();
+    const applicationToken = createApplicationToken(applicationID, applicationKey);
 
     const [installationID, repository] = message.split(`,`);
 
