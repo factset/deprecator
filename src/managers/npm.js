@@ -50,9 +50,9 @@ function npmFactory(customShell) {
     return got(this.packageUrl, {json: true})
       .catch(error => {
         if (error.statusCode && error.statusMessage) {
-          debug(`${error.statusCode} - ${error.statusMessage}`, error.response ? error.response.body : ``);
+          debug(`failed to fetch package, ${this.packageName}, metadata from the registry - ${error.statusCode} - ${error.statusMessage}`, error.response ? error.response.body : ``);
         } else {
-          debug(error);
+          debug(`failed to fetch package, ${this.packageName}, metadata from the registry - ${error}`);
         }
         throw error;
       })
