@@ -2,9 +2,12 @@
 
 const debug = require(`debug`)(`deprecator`);
 const got = require(`got`);
+const fs = require(`fs`);
+const path = require(`path`);
 const registryUrl = require(`registry-url`);
 const semver = require(`semver`);
 const shelljs = require(`shelljs`);
+const tmp = require(`tmp`);
 const url = require(`url`);
 
 module.exports = npmFactory();
@@ -28,8 +31,8 @@ function getRules() {
 function npmFactory(customShell) {
   const shell = customShell || shelljs;
 
-  function npm(dryRun, packageFileContents) {
-    this.dryRun = dryRun;
+  function npm(config, packageFileContents) {
+    this.dryRun = config.dryRun;
     this.packageName = JSON.parse(packageFileContents).name;
 
     debug(`creating npm handler for package '${this.packageName}'`);
@@ -44,6 +47,17 @@ function npmFactory(customShell) {
     );
 
     debug(`using '${this.packageUrl}' as the package URL for package '${this.packageName}'`);
+
+    /*
+     * Setup our temporary directory with any `npmrc` configuration, and our package contents.
+     * Both are needed by the `npm deprecate` command to know which package to deprecate, and any authentication
+     * credentials required by the registry.
+     */
+    this.tmpDir = tmp.dirSync();
+    if (config.npmrc) {
+      fs.writeFileSync(path.join(this.tmpDir.name, `.npmrc`), config.npmrc);
+    }
+    fs.writeFileSync(path.join(this.tmpDir.name, `package.json`), packageFileContents);
   }
 
   npm.prototype.fetch = function () {
@@ -107,7 +121,10 @@ function npmFactory(customShell) {
             return resolve(versionMetadata);
           }
 
-          shell.exec(`npm deprecate ${this.packageName}@${versionMetadata.version} "This version is no longer supported. Please upgrade."`, {silent: true}, callback.bind(this));
+          shell.exec(`npm deprecate ${this.packageName}@${versionMetadata.version} "This version is no longer supported. Please upgrade."`, {
+            cwd: this.tmpDir.name,
+            silent: true,
+          }, callback.bind(this));
         });
       });
 
@@ -134,4 +151,3 @@ function npmFactory(customShell) {
 
   return npm;
 }
-

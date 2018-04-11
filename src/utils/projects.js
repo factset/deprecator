@@ -33,7 +33,7 @@ function projects(customShell, customPackageManagers) {
     // Assume local project folder that may have a single package, or multiple package (monorepo).
     const promises = packageManagers.map(packageManager => fileHandler
       .loadFiles(packageManager.patterns)
-      .then(filesContent => filesContent.map(fileContent => new (packageManager.manager(shell))(config.dryRun, fileContent))));
+      .then(filesContent => filesContent.map(fileContent => new (packageManager.manager(shell))(config, fileContent))));
 
     return Promise.all(promises).then(managerResults => managerResults.reduce((combinedResults, results) => combinedResults.concat(results), []));
   };

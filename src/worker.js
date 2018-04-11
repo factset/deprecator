@@ -54,7 +54,13 @@ function start(workerID) {
 
     createInstallationToken(applicationToken, endpoint, installationID)
       .then(token => {
-        return index({dryRun: process.env.DRY_RUN, endpoint, repository, rules: JSON.parse(process.env.RULES || {}), token})
+        return index({
+          dryRun: process.env.DRY_RUN,
+          endpoint,
+          npmrc: process.env.NPMRC,
+          repository,
+          rules: JSON.parse(process.env.RULES || {}),
+          token})
           .then(deprecatedVersions => {
             const count = Object.keys(deprecatedVersions).reduce((count, repository) => count + deprecatedVersions[repository].length, 0);
             console.info(`[worker-${workerID}] deprecated the following versions - ${JSON.stringify(deprecatedVersions)}`);
