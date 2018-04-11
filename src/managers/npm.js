@@ -32,13 +32,18 @@ function npmFactory(customShell) {
     this.dryRun = dryRun;
     this.packageName = JSON.parse(packageFileContents).name;
 
-    debug(`package name is - ${this.packageName}`);
+    debug(`creating npm handler for package '${this.packageName}'`);
 
     this.registry = registryUrl(this.packageName.split(`/`)[0]);
+
+    debug(`using '${this.registry}' as the registry for package '${this.packageName}'`);
+
     this.packageUrl = url.resolve(
       this.registry,
       encodeURIComponent(this.packageName).replace(/^%40/, '@')
     );
+
+    debug(`using '${this.packageUrl}' as the package URL for package '${this.packageName}'`);
   }
 
   npm.prototype.fetch = function () {
