@@ -55,7 +55,11 @@ function start(workerID) {
     createInstallationToken(applicationToken, endpoint, installationID)
       .then(token => {
         return index({dryRun: process.env.DRY_RUN, endpoint, repository, rules: JSON.parse(process.env.RULES || {}), token})
-          .then(deprecatedVersions => console.info(`[worker-${workerID}] deprecated the following versions - ${JSON.stringify(deprecatedVersions)}`))
+          .then(deprecatedVersions => {
+            const count = Object.keys(deprecatedVersions).reduce((count, repository) => count + deprecatedVersions[repository].length, 0);
+            console.info(`[worker-${workerID}] count#worker.deprecated-versions=${count}`);
+            console.info(`[worker-${workerID}] deprecated the following versions - ${JSON.stringify(deprecatedVersions)}`);
+          })
           .catch(error => console.error(`[worker-${workerID}] ${error.stack}`))
           .then(() => console.info(`[worker-${workerID}] measure#worker.process-time=${new Date() - start}`))
           .then(() => console.info(`[worker-${workerID}] count#worker.repositories=1`))
