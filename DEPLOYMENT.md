@@ -2,6 +2,8 @@
 
 Guide for deploying `deprecator` to a Heroku-like environment.
 
+As you will see below, the App portion of `deprecator` only works for GitHub. GitLab is not supported. However, we would accept GitLab support if you are willing to contribute the work.
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
@@ -17,6 +19,12 @@ Guide for deploying `deprecator` to a Heroku-like environment.
 > Optional.
 
 Setting `DEBUG` to `deprecator` will print all debug statements available in the `deprecator` package.
+
+**DRY_RUN**
+
+> Optional.
+
+Setting `DRY_RUN` to `true` will cause `deprecator` to go through the deprecation process, including returning deprecation information, but it won't actually deprecate a package. Dry run mode makes it easy to see that `deprecator` is deprecating those packages, and versions, you expect, without any consequences. Then, when your confident of your results, you can remove the environment variable and `deprecator` will begin deprecating packages.
 
 **GITHUB_APPLICATION_ID**
 
