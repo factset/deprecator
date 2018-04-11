@@ -57,8 +57,8 @@ function start(workerID) {
         return index({dryRun: process.env.DRY_RUN, endpoint, repository, rules: JSON.parse(process.env.RULES || {}), token})
           .then(deprecatedVersions => {
             const count = Object.keys(deprecatedVersions).reduce((count, repository) => count + deprecatedVersions[repository].length, 0);
-            console.info(`[worker-${workerID}] count#worker.deprecated-versions=${count}`);
             console.info(`[worker-${workerID}] deprecated the following versions - ${JSON.stringify(deprecatedVersions)}`);
+            console.info(`[worker-${workerID}] count#worker.deprecated-versions=${count}`);
           })
           .catch(error => console.error(`[worker-${workerID}] ${error.stack}`))
           .then(() => console.info(`[worker-${workerID}] measure#worker.process-time=${new Date() - start}`))
