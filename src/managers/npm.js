@@ -82,7 +82,7 @@ function npmFactory(customShell) {
       // Retrieve only those versions that have not already been deprecated.
       .filter(versionMetadata => {
         if (versionMetadata.deprecated !== undefined) {
-          debug(`ignoring version '${versionMetadata.version}' as it has already been deprecated with message - "${versionMetadata.deprecated}"`);
+          debug(`ignoring version '${versionMetadata.version}' of '${versionMetadata.name}' as it has already been deprecated with message - "${versionMetadata.deprecated}"`);
           return false;
         }
 

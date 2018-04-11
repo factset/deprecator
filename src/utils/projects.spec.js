@@ -6,7 +6,6 @@ const chai = require(`chai`);
 const chaiAsPromised = require(`chai-as-promised`);
 const fs = require(`fs`);
 const mocha = require(`mocha`);
-const path = require(`path`);
 const projects = require(`./projects`);
 const projectsFactory = require(`./projects`).projects;
 const sinon = require(`sinon`);
@@ -63,7 +62,7 @@ describe.only(`projects`, function () {
       process.chdir(this.tmpDir.name);
 
       fs.writeFileSync(`package.json`, `{"name":"deprecator"}`);
-      fs.copyFileSync(path.join(this.cwd, `.npmrc`), path.join(this.tmpDir.name, `.npmrc`));
+      fs.writeFileSync(`.npmrc`, `registry=https://registry.yarnpkg.com/`);
     });
 
     afterEach(function () {
