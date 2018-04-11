@@ -48,6 +48,14 @@ function npmFactory(customShell) {
 
   npm.prototype.fetch = function () {
     return got(this.packageUrl, {json: true})
+      .catch(error => {
+        if (error.statusCode && error.statusMessage) {
+          debug(`${error.statusCode} - ${error.statusMessage}`, error.response ? error.response.body : ``);
+        } else {
+          debug(error);
+        }
+        throw error;
+      })
       .then(response => response.body)
       .then(this.saveMetadata.bind(this))
       .then(() => this)
