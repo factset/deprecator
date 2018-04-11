@@ -55,7 +55,7 @@ function npmFactory(customShell) {
      */
     this.tmpDir = tmp.dirSync();
     if (config.npmrc) {
-      fs.writeFileSync(path.join(this.tmpDir.name, `.npmrc`), config.npmrc);
+      fs.writeFileSync(path.join(this.tmpDir.name, `.npmrc`), Buffer.from(config.npmrc, `base64`).toString());
     }
     fs.writeFileSync(path.join(this.tmpDir.name, `package.json`), packageFileContents);
   }
