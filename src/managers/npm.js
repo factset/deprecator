@@ -121,7 +121,7 @@ function npmFactory(customShell) {
             return resolve(versionMetadata);
           }
 
-          shell.exec(`npm deprecate ${this.packageName}@${versionMetadata.version} "This version is no longer supported. Please upgrade."`, {
+          shell.exec(`npm deprecate ${this.packageName}@${versionMetadata.version} "This version is no longer supported. Please upgrade." --ignore-scripts`, {
             cwd: this.tmpDir.name,
             silent: true,
           }, callback.bind(this));
