@@ -17,6 +17,8 @@ Versions of a package are selected for deprecation based on matching each versio
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Command Line Tool](#command-line-tool)
+  - [GitHub App](#github-app)
   - [Available Rules](#available-rules)
     - [`all`](#all)
 - [Debugging](#debugging)
@@ -50,15 +52,23 @@ Installing `deprecator` globally allows you to the tool to manage the deprecatio
 
 ## Usage
 
-Please make sure you have ownership over the package you plan on using with `deprecator`, and that your credentials are stored in your `~/.npmrc` file.
+### Command Line Tool
 
-You can log into an [`npm`](https://npmjs.com)-compatible registry using the [`adduser` command](https://docs.npmjs.com/cli/adduser).
+Please make sure you have ownership over the package you plan on deprecating with `deprecator`, and that you have the appropriate credentials setup as described below.
 
-Next call `deprecator` from within your project's top folder, passing a comma-separated list of rule names:
+**Npm:** You can log into an [`npm`](https://npmjs.com)-compatible registry using the [`adduser` command](https://docs.npmjs.com/cli/adduser) (Doing so will update your `~/.npmrc` file.).
+
+Next, call `deprecator` from within your project's top folder, passing a comma-separated list of rule names:
 
 ```bash
 deprecator --rules=[RULE,...]
 ```
+
+### [GitHub App](https://developer.github.com/apps/)
+
+> We do not own, or run, a GitHub App.
+
+To deploy Deprecator as a GitHub application, please see our [_Deployment_](./DEPLOYMENT.MD) guide.
 
 ### Available Rules
 
