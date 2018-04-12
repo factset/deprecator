@@ -90,3 +90,11 @@ workflows:
       - node_6_yarn_latest
       - node_8_yarn_latest
       - node_next
+      - release:
+          filters:
+            branches:
+              only: master
+          requires:
+          - node_4_yarn_latest
+          - node_6_yarn_latest
+          - node_8_yarn_latest
