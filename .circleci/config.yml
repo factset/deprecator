@@ -98,3 +98,9 @@ workflows:
           - node_4_yarn_latest
           - node_6_yarn_latest
           - node_8_yarn_latest
+      - publish:
+          filters:
+            tags:
+              only: /.+/
+          requires:
+            - release
