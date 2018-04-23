@@ -59,7 +59,7 @@ describe(`rules`, () => {
       expect(majorVersions({version: `3.0.1`, _time: date})).to.be.false;
     });
 
-    it(`should return false for 'latest' dist-tag within allowed time range`, () => {
+    it(`should return false for old major when it's within the allowed time range`, () => {
       const months = 6;
 
       const majorVersions = rules.majorVersions(packageRegistryMetadata, months);
@@ -70,7 +70,7 @@ describe(`rules`, () => {
       expect(majorVersions({version: `2.0.0`, _time: date})).to.be.false;
     });
 
-    it(`should return true for 'latest' dist-tag outside of allowed time range`, () => {
+    it(`should return true for old major when it's outside of the allowed time range`, () => {
       const months = 6;
 
       const majorVersions = rules.majorVersions(packageRegistryMetadata, months);
