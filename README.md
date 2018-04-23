@@ -21,6 +21,7 @@ Versions of a package are selected for deprecation based on matching each versio
   - [GitHub App](#github-app)
   - [Available Rules](#available-rules)
     - [`all`](#all)
+    - [`majorVersionsBeforeSuccessor`](#majorversionsbeforesuccessor)
 - [Debugging](#debugging)
 - [Node Support Policy](#node-support-policy)
 - [Contributing](#contributing)
@@ -82,6 +83,16 @@ Deprecate all versions of a package.
 
 ```bash
 deprecator --rules=all
+```
+
+#### `majorVersionsBeforeSuccessor`
+
+Deprecate all versions of a major release line in which the earliest version released in the next major release line (the successor major version) has been out for at least ___ months.
+
+For example, to deprecate all versions of a major release line in which the earliest version released in the next major release line has been out for at least 6 months.
+
+```bash
+deprecator --rules=majorVersionsBeforeSuccessor=6
 ```
 
 ## Debugging

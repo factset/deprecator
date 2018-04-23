@@ -11,6 +11,7 @@ const rules = require(`./npm`).rules;
 const sinon = require(`sinon`);
 const sinonChai = require(`sinon-chai`);
 const packageRegistryMetadata = require(`../mock/package-registry.mock.json`);
+const packageRegistryMetadatamajorVersionsBeforeSuccessor = require(`../mock/package-registry.majorVersionsBeforeSuccessor.mock.json`);
 const packageMetadata = require(`../mock/package.mock.json`);
 
 chai.use(chaiAsPromised);
@@ -79,6 +80,51 @@ describe(`rules`, () => {
       date.setMonth(date.getMonth() - (months + 1));
 
       expect(majorVersions({version: `2.0.0`, _time: date})).to.be.true;
+    });
+  });
+
+  describe(`majorVersionsBeforeSuccessor`, () => {
+    it(`throws an error when not passed valid arguments`, () => {
+      expect(rules.majorVersionsBeforeSuccessor).to.throw(Error);
+      expect(() => rules.majorVersionsBeforeSuccessor({})).to.throw(Error);
+    });
+
+    it(`should return false if the current version is the 'latest' dist-tag`, () => {
+      const months = 6;
+
+      const date = new Date();
+      date.setMonth(date.getMonth() - (months - 1));
+      packageRegistryMetadatamajorVersionsBeforeSuccessor.time[`3.0.0`] = date.toISOString();
+
+      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadatamajorVersionsBeforeSuccessor, months);
+
+      expect(majorVersions({version: `3.0.1`})).to.be.false;
+    });
+
+    it(`should return false for old major when it's within the allowed time range`, () => {
+      const months = 6;
+
+      const date = new Date();
+      date.setMonth(date.getMonth() - (months - 1));
+      packageRegistryMetadatamajorVersionsBeforeSuccessor.time[`3.0.0`] = date.toISOString();
+
+      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadatamajorVersionsBeforeSuccessor, months);
+
+      expect(majorVersions({version: `2.0.0`})).to.be.false;
+      expect(majorVersions({version: `2.0.1`})).to.be.false;
+    });
+
+    it(`should return true for old major when it's outside of the allowed time range`, () => {
+      const months = 6;
+
+      const date = new Date();
+      date.setMonth(date.getMonth() - (months + 1));
+      packageRegistryMetadatamajorVersionsBeforeSuccessor.time[`3.0.0`] = date.toISOString();
+
+      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadatamajorVersionsBeforeSuccessor, months);
+
+      expect(majorVersions({version: `2.0.0`})).to.be.true;
+      expect(majorVersions({version: `2.0.1`})).to.be.true;
     });
   });
 });

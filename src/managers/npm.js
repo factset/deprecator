@@ -3,6 +3,7 @@
 const debug = require(`debug`)(`deprecator`);
 const got = require(`got`);
 const fs = require(`fs`);
+const Moment = require(`moment`);
 const path = require(`path`);
 const registryUrl = require(`registry-url`);
 const semver = require(`semver`);
@@ -32,6 +33,44 @@ function getRules() {
 
       return versionMetadata => (semver.major(versionMetadata.version) < latestMajor) &&
         (new Date(versionMetadata._time) < date);
+    },
+
+    /*
+     * Deprecate all versions of a major release line in which the earliest version released in the next
+     * major release line (the successor major version) has been out for at least ___ months.
+     */
+    majorVersionsBeforeSuccessor: (metadata, monthsPassed) => {
+      const latestMajor = semver.major(metadata[`dist-tags`].latest);
+
+      const monthsSinceRelease = Object.keys(metadata.versions).reduce(calculateReleaseTimes, {});
+
+      const majorVersions = Object.keys(monthsSinceRelease).map(Number).sort();
+      debug(`major versions - ${majorVersions}`);
+
+      return versionMetadata => (semver.major(versionMetadata.version) < latestMajor) && (sinceSuccessorWasReleased(semver.major(versionMetadata.version)) > monthsPassed);
+
+      function calculateReleaseTimes(sinceRelease, version) {
+        const major = semver.major(version);
+
+        if (sinceRelease[major]) {
+          return sinceRelease;
+        }
+
+        const earliestVersionForReleaseLine = Object.keys(metadata.versions).filter(releaseVersion => semver.major(releaseVersion) === major).sort(semver.compare)[0];
+        debug(`earliest release version for major version ${major} was ${earliestVersionForReleaseLine}`);
+
+        // We want to know the number of months that have passed since this major version was initially released.
+        sinceRelease[major] = Moment.duration((new Moment()).diff(new Moment(metadata.time[earliestVersionForReleaseLine]))).asMonths();
+        debug(`major version ${major} was released ${sinceRelease[major]} months ago`);
+
+        return sinceRelease;
+      }
+
+      function sinceSuccessorWasReleased(major) {
+        const nextMajor = majorVersions[majorVersions.indexOf(major) + 1];
+        debug(`after version ${major}, the next major version is  ${nextMajor}, and was released ${monthsSinceRelease[nextMajor]} months ago`);
+        return monthsSinceRelease[nextMajor];
+      }
     },
   };
 }

@@ -2689,6 +2689,10 @@ modify-values@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
 
+moment@^2.22.1:
+  version "2.22.1"
+  resolved "https://registry.npmjs.org/moment/-/moment-2.22.1.tgz#529a2e9bf973f259c9643d237fda84de3a26e8ad"
+
 mpbasic@0.0.x:
   version "0.0.18"
   resolved "https://registry.npmjs.org/mpbasic/-/mpbasic-0.0.18.tgz#f459ba1dc95cca13e5f8003882700d0926a53c00"
