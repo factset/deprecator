@@ -34,7 +34,7 @@ describe(`rules`, () => {
   describe(`majorVersions`, () => {
     it(`throws an error when not passed valid arguments`, () => {
       expect(rules.majorVersions).to.throw(Error);
-      expect(() => rules.major({})).to.throw(Error);
+      expect(() => rules.majorVersions({})).to.throw(Error);
     });
 
     it(`should return false if the current version is the same major as the 'latest' dist-tag`, () => {
