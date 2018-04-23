@@ -16,11 +16,19 @@ module.exports.rules = getRules();
 
 function getRules() {
   return {
+    // Deprecate all versions of a package.
     all: (/* metadata, option */) => (/* versionMetadata */) => true,
-    majorVersions: (metadata, option) => {
+
+    /*
+     * Deprecate all versions of a Major release line that were released ___
+     * months before the current date, and are not part of the current Major release
+     * line (The one pointed to by the `latest` dist-tag).
+     */
+    majorVersions: (metadata, monthsPassed) => {
       const latestMajor = semver.major(metadata[`dist-tags`].latest);
+
       const date = new Date();
-      date.setMonth(date.getMonth() - Number(option));
+      date.setMonth(date.getMonth() - Number(monthsPassed));
 
       return versionMetadata => (semver.major(versionMetadata.version) < latestMajor) &&
         (new Date(versionMetadata._time) < date);
