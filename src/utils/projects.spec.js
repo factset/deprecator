@@ -21,7 +21,7 @@ const beforeEach = mocha.beforeEach;
 const describe = mocha.describe;
 const it = mocha.it;
 
-describe.only(`projects`, function () {
+describe(`projects`, function () {
   // Setting up our fake project takes longer than the default Mocha timeout.
   this.timeout(20000);
 

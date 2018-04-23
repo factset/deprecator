@@ -142,9 +142,9 @@ describe(`npm`, function () {
             .and.to.deep.include({name: `deprecator`, version: `3.0.0`, _time: `2018-01-30T18:00:00.000Z`})
             .and.to.deep.include({name: `deprecator`, version: `3.0.1`, _time: `2018-01-30T18:00:00.000Z`});
         })
-        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.1 "This version is no longer supported. Please upgrade."`))
-        .then(() => expect(this.shell.exec.secondCall).calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade."`))
-        .then(() => expect(this.shell.exec.thirdCall).calledWith(`npm deprecate deprecator@3.0.1 "This version is no longer supported. Please upgrade."`));
+        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.1 "This version is no longer supported. Please upgrade." --ignore-scripts`))
+        .then(() => expect(this.shell.exec.secondCall).calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade." --ignore-scripts`))
+        .then(() => expect(this.shell.exec.thirdCall).calledWith(`npm deprecate deprecator@3.0.1 "This version is no longer supported. Please upgrade." --ignore-scripts`));
     });
 
     it(`deprecates undeprecated majors that are not 'latest' dist-tag`, function () {
@@ -170,7 +170,7 @@ describe(`npm`, function () {
             .and.to.have.length(1)
             .and.to.deep.include({name: `deprecator`, version: `2.0.1`, _time: modifiedMetadata.time[`2.0.1`]});
         })
-        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.1 "This version is no longer supported. Please upgrade."`));
+        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.1 "This version is no longer supported. Please upgrade." --ignore-scripts`));
     });
   });
 });

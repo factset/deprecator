@@ -86,8 +86,8 @@ describe(`deprecator`, function () {
         .to.be.fulfilled
         .and.to.eventually.deep.equal({deprecator: [`2.0.0`, `3.0.0`]})
         .then(() => expect(this.shell.exec).to.have.been.calledTwice)
-        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.0 "This version is no longer supported. Please upgrade."`))
-        .then(() => expect(this.shell.exec.secondCall).calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade."`))
+        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.0 "This version is no longer supported. Please upgrade." --ignore-scripts`))
+        .then(() => expect(this.shell.exec.secondCall).calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade." --ignore-scripts`))
         .then(() => scope.done());
     });
 
@@ -98,7 +98,7 @@ describe(`deprecator`, function () {
         .to.be.fulfilled
         .to.to.eventually.deep.equal({deprecator: [`3.0.0`]})
         .then(() => expect(this.shell.exec).to.have.been.calledOnce
-          .and.calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade."`))
+          .and.calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade." --ignore-scripts`))
         .then(() => scope.done());
     });
 
@@ -109,8 +109,8 @@ describe(`deprecator`, function () {
       return expect(this.deprecator({rules: {all: null}}))
         .to.be.rejectedWith(Error, `Failed to deprecate deprecator@2.0.0 - npm failed`)
         .then(() => expect(this.shell.exec).to.have.been.calledTwice)
-        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.0 "This version is no longer supported. Please upgrade."`))
-        .then(() => expect(this.shell.exec.secondCall).calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade."`))
+        .then(() => expect(this.shell.exec.firstCall).calledWith(`npm deprecate deprecator@2.0.0 "This version is no longer supported. Please upgrade." --ignore-scripts`))
+        .then(() => expect(this.shell.exec.secondCall).calledWith(`npm deprecate deprecator@3.0.0 "This version is no longer supported. Please upgrade." --ignore-scripts`))
         .then(() => scope.done());
     });
 
