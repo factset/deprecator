@@ -1,33 +1,16 @@
 version: 2
 
-node_4: &node_4
-  docker:
-    - image: node:4
-
 node_6: &node_6
   docker:
-    - image: node:6
+    - image: node:6@sha256:4c90d660e51d7187c01f3001d95c8c922b084a83f5001660ef16986301e8a860
 
 node_8: &node_8
   docker:
-    - image: node:8
+    - image: node:8@sha256:26e4c77f9f797c3993780943239fa79419f011dd93ae4e0097089e2145aeaa24
 
 node_next: &node_next
   docker:
-    - image: node:latest
-  steps:
-    - checkout
-    - restore_cache:
-        keys:
-          - dependencies_yarn_latest
-    - run: curl -o- -L https://yarnpkg.com/install.sh | bash
-    - run: yarn install --frozen-lockfile
-    - save_cache:
-        paths:
-          - node_modules
-          - ${HOME}/.cache/yarn
-        key: dependencies_yarn_latest
-    - run: yarn test && ($(yarn bin)/codecov || echo "Codecov did not collect coverage reports")
+    - image: node:latest@sha256:bd7b9aaf77ab2ce1e83e7e79fc0969229214f9126ced222c64eab49dc0bdae90
 
 yarn_latest: &yarn_latest
   steps:
@@ -42,30 +25,29 @@ yarn_latest: &yarn_latest
           - node_modules
           - ${HOME}/.cache/yarn
         key: dependencies_yarn_latest
-    - run: yarn test && ($(yarn bin)/codecov || echo "Codecov did not collect coverage reports")
+    - run: yarn test
+    - run: ($(yarn bin)/codecov || echo "Codecov did not collect coverage reports")
 
 jobs:
-  node_4_yarn_latest:
-    <<: [*node_4, *yarn_latest]
   node_6_yarn_latest:
     <<: [*node_6, *yarn_latest]
   node_8_yarn_latest:
     <<: [*node_8, *yarn_latest]
   node_next:
-    <<: [*node_next]
-  release:
+    <<: [*node_next, *yarn_latest]
+  deliver:
     <<: [*node_8]
     steps:
       - checkout
       - restore_cache:
           keys:
-            - dependencies_release
+            - dependencies_deliver
       - run: yarn install --frozen-lockfile
       - save_cache:
           paths:
             - node_modules
             - ${HOME}/.cache/yarn
-          key: dependencies_release
+          key: dependencies_deliver
       - run: $(yarn bin)/semantic-release-github
   publish:
     <<: [*node_8]
@@ -86,16 +68,14 @@ workflows:
   version: 2
   build:
     jobs:
-      - node_4_yarn_latest
       - node_6_yarn_latest
       - node_8_yarn_latest
       - node_next
-      - release:
+      - deliver:
           filters:
             branches:
               only: master
           requires:
-          - node_4_yarn_latest
           - node_6_yarn_latest
           - node_8_yarn_latest
       - publish:
@@ -103,4 +83,4 @@ workflows:
             tags:
               only: /.+/
           requires:
-            - release
+            - deliver
