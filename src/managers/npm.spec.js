@@ -11,17 +11,25 @@ const rules = require(`./npm`).rules;
 const sinon = require(`sinon`);
 const sinonChai = require(`sinon-chai`);
 const packageRegistryMetadata = require(`../mock/package-registry.mock.json`);
-const packageRegistryMetadatamajorVersionsBeforeSuccessor = require(`../mock/package-registry.majorVersionsBeforeSuccessor.mock.json`);
+const packageRegistryMetadataMajorVersionsBeforeSuccessor = require(`../mock/package-registry.majorVersionsBeforeSuccessor.mock.json`);
 const packageMetadata = require(`../mock/package.mock.json`);
 
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
 const expect = chai.expect;
 
+const MONTHS = 6;
+
 const before = mocha.before;
 const beforeEach = mocha.beforeEach;
 const describe = mocha.describe;
 const it = mocha.it;
+
+function monthsAgo(months) {
+  const date = new Date();
+  date.setMonth(date.getMonth() - months);
+  return date.toISOString();
+}
 
 describe(`rules`, () => {
   describe(`all`, () => {
@@ -90,38 +98,34 @@ describe(`rules`, () => {
     });
 
     it(`should return false if the current version is the 'latest' dist-tag`, () => {
-      const months = 6;
+      packageRegistryMetadataMajorVersionsBeforeSuccessor.time[`3.0.1`] = monthsAgo(MONTHS + 1);
 
-      const date = new Date();
-      date.setMonth(date.getMonth() - (months - 1));
-      packageRegistryMetadatamajorVersionsBeforeSuccessor.time[`3.0.0`] = date.toISOString();
-
-      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadatamajorVersionsBeforeSuccessor, months);
+      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadataMajorVersionsBeforeSuccessor, MONTHS);
 
       expect(majorVersions({version: `3.0.1`})).to.be.false;
     });
 
+    it(`should return false for current major when it's outside of the allowed time range`, () => {
+      packageRegistryMetadataMajorVersionsBeforeSuccessor.time[`3.0.0`] = monthsAgo(MONTHS + 1);
+
+      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadataMajorVersionsBeforeSuccessor, MONTHS);
+
+      expect(majorVersions({version: `3.0.0`})).to.be.false;
+    });
+
     it(`should return false for old major when it's within the allowed time range`, () => {
-      const months = 6;
+      packageRegistryMetadataMajorVersionsBeforeSuccessor.time[`3.0.0`] = monthsAgo(MONTHS - 1);
 
-      const date = new Date();
-      date.setMonth(date.getMonth() - (months - 1));
-      packageRegistryMetadatamajorVersionsBeforeSuccessor.time[`3.0.0`] = date.toISOString();
-
-      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadatamajorVersionsBeforeSuccessor, months);
+      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadataMajorVersionsBeforeSuccessor, MONTHS);
 
       expect(majorVersions({version: `2.0.0`})).to.be.false;
       expect(majorVersions({version: `2.0.1`})).to.be.false;
     });
 
     it(`should return true for old major when it's outside of the allowed time range`, () => {
-      const months = 6;
+      packageRegistryMetadataMajorVersionsBeforeSuccessor.time[`3.0.0`] = monthsAgo(MONTHS + 1);
 
-      const date = new Date();
-      date.setMonth(date.getMonth() - (months + 1));
-      packageRegistryMetadatamajorVersionsBeforeSuccessor.time[`3.0.0`] = date.toISOString();
-
-      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadatamajorVersionsBeforeSuccessor, months);
+      const majorVersions = rules.majorVersionsBeforeSuccessor(packageRegistryMetadataMajorVersionsBeforeSuccessor, MONTHS);
 
       expect(majorVersions({version: `2.0.0`})).to.be.true;
       expect(majorVersions({version: `2.0.1`})).to.be.true;
