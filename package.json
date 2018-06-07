@@ -63,7 +63,7 @@
     "nock": "^9.1.4",
     "npm-publish-git-tag": "^1.1.14",
     "nyc": "^11.3.0",
-    "semantic-release-github": "^3.0.2",
+    "semantic-release-github": "^4.0.0",
     "sinon": "^4.2.2",
     "sinon-chai": "^2.14.0"
   }
