@@ -87,13 +87,27 @@ deprecator --rules=all
 
 #### `majorVersionsBeforeSuccessor`
 
-Deprecate all versions of a major release line in which the earliest version released in the next major release line (the successor major version) has been out for at least ___ months.
+Deprecate all versions of a _major_ release line, such as all _minor_ and _patch_ releases for a _major_ version, in which the earliest version released in the next _major_ release line (the successor _major_ version) has been out for a given number of months.
 
-For example, to deprecate all versions of a major release line in which the earliest version released in the next major release line has been out for at least 6 months.
+For example, to deprecate all versions of a _major_ release line in which the earliest version released in the next _major_ release line has been out for at least 6 months.
 
 ```bash
 deprecator --rules=majorVersionsBeforeSuccessor=6
 ```
+
+To manage _minor_ releases for a _major_ release line please use the `minorVersionsBeforeSuccessor` option documented below.
+
+#### `minorVersionsBeforeSuccessor`
+
+Deprecate all versions of a _minor_ release line, such as all _patch_ releases for a _minor_ version, in which the earliest version released in the next _minor_ release line (the successor _minor_ version) has been out for a given number of months.
+
+For example, to deprecate all versions of a _minor_ release line in which the earliest version released in the next _minor_ release line has been out for at least 6 months.
+
+```bash
+deprecator --rules=minorVersionsBeforeSuccessor=6
+```
+
+If a _minor_ release line is the last _minor_ for a particular _major_ version, please use the `majorVersionsBeforeSuccessor` option to manage its deprecation.
 
 ## Debugging
 

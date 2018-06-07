@@ -72,6 +72,54 @@ function getRules() {
         return monthsSinceRelease[nextMajor];
       }
     },
+
+    minorVersionsBeforeSuccessor: (metadata, monthsPassed) => {
+      const latestMajor = semver.major(metadata[`dist-tags`].latest);
+      const latestMinor = semver.minor(metadata[`dist-tags`].latest);
+
+      const monthsSinceRelease = Object.keys(metadata.versions).reduce(calculateReleaseTimes, {});
+
+      return versionMetadata => {
+        if (`${semver.major(versionMetadata.version)}.${semver.minor(versionMetadata.version)}` === `${latestMajor}.${latestMinor}`) {
+          debug(`can't deprecate latest major.minor version ${latestMajor}.${latestMinor}`);
+          return false;
+        }
+        return sinceSuccessorWasReleased(versionMetadata.version) > monthsPassed;
+      };
+
+      function calculateReleaseTimes(sinceRelease, version) {
+        debug(`processing version ${version} for calculating release time`);
+
+        const major = semver.major(version);
+        const minor = semver.minor(version);
+
+        if (sinceRelease[major] && sinceRelease[major][minor]) {
+          debug(`skipping version ${version} as we have already calculated earliest release of version ${major}.${minor}.x`);
+          return sinceRelease;
+        }
+
+        sinceRelease[major] = sinceRelease[major] || {};
+
+        const earliestVersionForReleaseLine = Object.keys(metadata.versions).filter(releaseVersion => semver.major(releaseVersion) === major && semver.minor(releaseVersion) === minor).sort(semver.compare)[0];
+        debug(`earliest release version for minor version ${major}.${minor}.x was ${earliestVersionForReleaseLine}`);
+
+        // We want to know the number of months that have passed since this minor version was initially released.
+        sinceRelease[major][minor] = Moment.duration((new Moment()).diff(new Moment(metadata.time[earliestVersionForReleaseLine]))).asMonths();
+        debug(`minor version ${major}.${minor} was released ${sinceRelease[major][minor]} months ago`);
+
+        return sinceRelease;
+      }
+
+      function sinceSuccessorWasReleased(version) {
+        const major = semver.major(version);
+        const minor = semver.minor(version);
+
+        const minors = Object.keys(monthsSinceRelease[major]).map(Number).sort();
+        const nextMinor = minors[minors.indexOf(minor) + 1];
+        debug(`after version ${major}.${minor}, the next minor version is ${major}.${nextMinor}, and it was released ${monthsSinceRelease[major][nextMinor]} months ago`);
+        return monthsSinceRelease[major][nextMinor];
+      }
+    },
   };
 }
 

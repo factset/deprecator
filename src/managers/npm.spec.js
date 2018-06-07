@@ -12,6 +12,7 @@ const sinon = require(`sinon`);
 const sinonChai = require(`sinon-chai`);
 const packageRegistryMetadata = require(`../mock/package-registry.mock.json`);
 const packageRegistryMetadataMajorVersionsBeforeSuccessor = require(`../mock/package-registry.majorVersionsBeforeSuccessor.mock.json`);
+const packageRegistryMetadataMinorVersionsBeforeSuccessor = require(`../mock/package-registry.minorVersionsBeforeSuccessor.mock.json`);
 const packageMetadata = require(`../mock/package.mock.json`);
 
 chai.use(chaiAsPromised);
@@ -109,6 +110,72 @@ describe(`rules`, () => {
 
       expect(majorVersions({version: `2.0.0`})).to.be.true;
       expect(majorVersions({version: `2.0.1`})).to.be.true;
+    });
+  });
+
+  describe(`minorVersionsBeforeSuccessor`, () => {
+    it(`throws an error when not passed valid arguments`, () => {
+      expect(rules.minorVersionsBeforeSuccessor).to.throw(Error);
+      expect(() => rules.minorVersionsBeforeSuccessor({})).to.throw(Error);
+    });
+
+    it(`should return false for the latest minor version`, () => {
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.2.0`] = monthsAgo(MONTHS + 1);
+
+      const minorVersions = rules.minorVersionsBeforeSuccessor(packageRegistryMetadataMinorVersionsBeforeSuccessor, MONTHS);
+
+      expect(minorVersions({version: `2.2.0`}), `2.2.0`).to.be.false;
+    });
+
+    it(`should return false for old minor versions when all their successors are within the allowed time range`, () => {
+      [`2.0.0`, `2.1.0`, `2.1.1`].forEach(function (version) {
+        packageRegistryMetadataMinorVersionsBeforeSuccessor.time[version] = monthsAgo(MONTHS - 1);
+      });
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.2.0`] = monthsAgo(MONTHS - 1);
+
+      const minorVersions = rules.minorVersionsBeforeSuccessor(packageRegistryMetadataMinorVersionsBeforeSuccessor, MONTHS);
+
+      expect(minorVersions({version: `2.0.0`}), `2.0.0`).to.be.false;
+      expect(minorVersions({version: `2.1.0`}), `2.1.0`).to.be.false;
+      expect(minorVersions({version: `2.1.1`}), `2.1.1`).to.be.false;
+      expect(minorVersions({version: `2.2.0`}), `2.2.0`).to.be.false;
+    });
+
+    it(`should return true for the first old minor version when it's successor is outside of the allowed time range`, () => {
+      // Minor version 2.1 must have been out for at least _MONTHS_ before the previous
+      // minor 2.0 is considered unsupported/deprecated.
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.0.0`] = monthsAgo(MONTHS + 1);
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.1.0`] = monthsAgo(MONTHS + 1);
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.1.1`] = monthsAgo(MONTHS - 1);
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.2.0`] = monthsAgo(MONTHS - 1);
+
+      const minorVersions = rules.minorVersionsBeforeSuccessor(packageRegistryMetadataMinorVersionsBeforeSuccessor, MONTHS);
+
+      expect(minorVersions({version: `2.0.0`}), `2.0.0`).to.be.true;
+
+      // Because minor version 2.2 has not been out for at least _MONTHS_ the previous
+      // minor version 2.1 is still considered supported.
+      expect(minorVersions({version: `2.1.0`}), `2.1.0`).to.be.false;
+      expect(minorVersions({version: `2.1.1`}), `2.1.1`).to.be.false;
+
+      expect(minorVersions({version: `2.2.0`}), `2.2.0`).to.be.false;
+    });
+
+    it(`should return true for all patches on a minor when a minor's successor is outside of the allowed time range`, () => {
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.0.0`] = monthsAgo(MONTHS + 1);
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.1.0`] = monthsAgo(MONTHS + 1);
+
+      // Intentionally "released" after the minor successor has been released. Though this was released after it's minor
+      // successor, it will still be marked as deprecated because it's successor has been out for the given number of months.
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.1.1`] = monthsAgo(MONTHS - 1);
+      packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.2.0`] = monthsAgo(MONTHS + 1);
+
+      const minorVersions = rules.minorVersionsBeforeSuccessor(packageRegistryMetadataMinorVersionsBeforeSuccessor, MONTHS);
+
+      expect(minorVersions({version: `2.0.0`}), `2.0.0`).to.be.true;
+      expect(minorVersions({version: `2.1.0`}), `2.1.0`).to.be.true;
+      expect(minorVersions({version: `2.1.1`}), `2.1.1`).to.be.true;
+      expect(minorVersions({version: `2.2.0`}), `2.2.0`).to.be.false;
     });
   });
 });
