@@ -120,6 +120,39 @@ function getRules() {
         return monthsSinceRelease[major][nextMinor];
       }
     },
+
+    patchVersions: metadata /* , monthsPassed */ => {
+      const latest = metadata[`dist-tags`].latest;
+
+      debug(`latest 'dist-tag' version is ${latest}`);
+
+      const latestPatches = Object.keys(metadata.versions).reduce(calculateLatestPatches, {});
+
+      debug(`latest patches are %O`, latestPatches);
+
+      // Deprecate, return `true`, only if the version is not the latest patch on a given `major.minor` release.
+      return versionMetadata => (versionMetadata.version !== latest) &&
+        (versionMetadata.version !== latestPatches[semver.major(versionMetadata.version)][semver.minor(versionMetadata.version)]);
+
+      function calculateLatestPatches(patches, version) {
+        const major = semver.major(version);
+        const minor = semver.minor(version);
+
+        if (patches[major] === undefined) {
+          patches[major] = {};
+        }
+
+        if (patches[major][minor] === undefined) {
+          patches[major][minor] = version;
+          return patches;
+        } else if (semver.gt(version, patches[major][minor])) {
+          patches[major][minor] = version;
+          return patches;
+        }
+
+        return patches;
+      }
+    },
   };
 }
 

@@ -178,6 +178,45 @@ describe(`rules`, () => {
       expect(minorVersions({version: `2.2.0`}), `2.2.0`).to.be.false;
     });
   });
+
+  describe(`patchVersions`, () => {
+    it(`throws an error when not passed valid arguments`, () => {
+      expect(rules.patchVersions).to.throw(Error);
+      expect(() => rules.minorVersionsBeforeSuccessor({})).to.throw(Error);
+    });
+
+    it(`throws an error when given a version that does not exist`, () => {
+      expect(rules.patchVersions).to.throw(Error);
+      expect(() => rules.minorVersionsBeforeSuccessor({version: `4.0.0`})).to.throw(Error);
+    });
+
+    it(`should return false if the current version is the same as the 'latest' dist-tag`, () => {
+      // Set the `latest` dist-tag to a version that is older than the latest patch for that
+      // major.minor release line. Perhaps there was a serious bug and the developer needed to
+      // revert `latest` to an earlier patch. We don't want to deprecate the patch version associated
+      // with `latest`.
+      const registryMetadata = Object.assign({}, packageRegistryMetadata, {'dist-tags': {latest: `3.0.0`}});
+      const patchVersions = rules.patchVersions(registryMetadata);
+
+      expect(patchVersions({version: `3.0.0`})).to.be.false;
+    });
+
+    it(`should return false if the version is the last patch for a given major.minor version`, () => {
+      const patchVersions = rules.patchVersions(packageRegistryMetadata);
+
+      // Expect(patchVersions({version: `1.0.0`})).to.be.false;
+      // Expect(patchVersions({version: `2.0.0`})).to.be.false;
+      expect(patchVersions({version: `3.0.1`})).to.be.false;
+    });
+
+    it(`should return true if the version is not the last patch for a given major.minor version`, () => {
+      const patchVersions = rules.patchVersions(packageRegistryMetadata);
+
+      expect(patchVersions({version: `3.0.0`})).to.be.true;
+    });
+
+    it.skip(`should return true if the patch version is the latest patch release, but it's not the latest dist-tag`);
+  });
 });
 
 describe(`npm`, function () {

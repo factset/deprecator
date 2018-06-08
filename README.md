@@ -109,6 +109,18 @@ deprecator --rules=minorVersionsBeforeSuccessor=6
 
 If a _minor_ release line is the last _minor_ for a particular _major_ version, please use the `majorVersionsBeforeSuccessor` option to manage its deprecation.
 
+#### `patchVersions`
+
+Deprecate all _patch_ releases for a _major_._minor_ release line except the latest patch in that release line, or the one pointed to by the `latest` dist-tag.
+
+For example, if a project has released `1.0.0`, `1.0.1`, and `1.0.2`, setting `patchVersions` will deprecate the first two releases.
+
+```bash
+deprecator --rules=patchVersions
+```
+
+**Note**: If, in the earlier example, your project's `latest` dist-tag pointed to `1.0.1`, then only `1.0.0` would be deprecated. The other two releases would not be deprecated. Version `1.0.1` is not deprecated because it's pointed to by `latest`, and `1.0.2` is not deprecated because it's the latest patch in the `1.0` release line. A future feature will allow `1.0.2` to be deprecated.
+
 ## Debugging
 
 To assist users of `deprecator` with debugging the behavior of this module we use the [debug](https://www.npmjs.com/package/debug) utility package to print information about the release process to the console. To enable debug message printing, the environment variable `DEBUG`, which is the variable used by the `debug` package, must be set to a value configured by the package containing the debug messages to be printed.
