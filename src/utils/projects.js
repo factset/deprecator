@@ -24,7 +24,9 @@ function projects(customShell, customPackageManagers) {
     if (config.autoDiscover) {
       debug(`support for auto discovering repositories not yet implemented`);
       return Promise.resolve([]);
-    } else if (config.repository) {
+    }
+
+    if (config.repository) {
       fileHandler = new RepositoryHandler(config);
     } else {
       fileHandler = diskHandler;

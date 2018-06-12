@@ -19,6 +19,5 @@ function loadFiles(packageMetadataFilePattern) {
   return globAsync(packageMetadataFilePattern)
     .then(files => debugAndReturn(`found the following files - %O`, files))
     .then(files => Promise.all(files.map(file => fsAsync.readFileAsync(file))))
-    .then(filesContent => filesContent.map(fileContent => fileContent.toString()))
-  ;
+    .then(filesContent => filesContent.map(fileContent => fileContent.toString()));
 }
