@@ -145,7 +145,9 @@ function getRules() {
         if (patches[major][minor] === undefined) {
           patches[major][minor] = version;
           return patches;
-        } else if (semver.gt(version, patches[major][minor])) {
+        }
+
+        if (semver.gt(version, patches[major][minor])) {
           patches[major][minor] = version;
           return patches;
         }
@@ -200,8 +202,7 @@ function npmFactory(customShell) {
       })
       .then(response => response.body)
       .then(this.saveMetadata.bind(this))
-      .then(() => this)
-    ;
+      .then(() => this);
   };
 
   npm.prototype.deprecate = function (chosenRules) {
