@@ -85,3 +85,7 @@ workflows:
           requires:
             - deliver
           context: npm-interaction
+
+notify:
+  webhooks:
+    - url: https://webhooks.gitter.im/e/dca3e79d4aff83f61953
