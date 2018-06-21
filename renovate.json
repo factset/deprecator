@@ -1,12 +1,12 @@
 {
   "automerge": true,
+  "automergeType": "branch-push",
   "docker": {
     "digest": {
       "groupName": "Docker Digests",
       "group": {
         "prTitle": "Update and group Docker digests"
-      },
-      "automerge": true
+      }
     }
   },
   "labels": ["refactor"],
@@ -20,8 +20,8 @@
     "enabled": true,
     "supportPolicy": ["lts", "current"]
   },
-  "pinVersions": false,
   "prCreation": "not-pending",
+  "prNotPendingHours": 1,
   "rebaseStalePrs": true,
   "unpublishSafe": true
 }
