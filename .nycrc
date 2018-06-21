@@ -1,0 +1,16 @@
+{
+  "all": true,
+  "cache": true,
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "src/cli.js",
+    "src/**/*.spec.js",
+    "src/**/*.mocks.js"
+  ],
+  "reporter": [
+    "lcov",
+    "text"
+  ]
+}

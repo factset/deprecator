@@ -30,7 +30,7 @@
     "dev": "docker run --rm --user node -v \"$(pwd)\":/app -w /app -it node:4 sh -c \"yarn install; yarn test; bash\"",
     "start": "node src/server.js",
     "schedule": "node src/scheduler.js",
-    "test": "eslint src/ && nyc --all --cache --include=src/ --exclude=src/cli.js --exclude=src/**/*.spec.js --exclude=src/**/*.mocks.js --reporter=lcov --reporter=text mocha --check-leaks --full-trace --globals __core-js_shared__,__coverage__,YamlEscaper --inline-diffs --no-exit --recursive --reporter=progress --retries 1 src/**/*.spec.js",
+    "test": "eslint src/ && nyc mocha --opts mocha.opts src/**/*.spec.js",
     "worker": "node src/worker.js"
   },
   "version": "1.0.0",
