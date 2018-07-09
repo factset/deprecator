@@ -2752,8 +2752,8 @@ normalize-url@2.0.1:
     sort-keys "^2.0.0"
 
 npm-publish-git-tag@^2.0.0:
-  version "2.1.11"
-  resolved "https://registry.npmjs.org/npm-publish-git-tag/-/npm-publish-git-tag-2.1.11.tgz#3890a0cbb708995814acbdef85a0591ecf157548"
+  version "2.1.12"
+  resolved "https://registry.npmjs.org/npm-publish-git-tag/-/npm-publish-git-tag-2.1.12.tgz#f2a0816c2f1c16ab7a37cd0c2f13102e422e6d35"
   dependencies:
     bluebird "^3.5.0"
     commander "^2.9.0"
@@ -3457,8 +3457,8 @@ semantic-release-github-releaser@^5.0.0:
     lodash "^4.0.1"
 
 semantic-release-github@^4.0.0:
-  version "4.0.11"
-  resolved "https://registry.npmjs.org/semantic-release-github/-/semantic-release-github-4.0.11.tgz#29560767bdf9a671e72e742d9827c2ee4912c65d"
+  version "4.0.12"
+  resolved "https://registry.npmjs.org/semantic-release-github/-/semantic-release-github-4.0.12.tgz#f6cdf6d8af49a8acb4a43ff6c1327658c436763e"
   dependencies:
     bluebird "^3.3.4"
     commander "^2.9.0"
