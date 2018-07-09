@@ -2752,8 +2752,8 @@ normalize-url@2.0.1:
     sort-keys "^2.0.0"
 
 npm-publish-git-tag@^2.0.0:
-  version "2.1.12"
-  resolved "https://registry.npmjs.org/npm-publish-git-tag/-/npm-publish-git-tag-2.1.12.tgz#f2a0816c2f1c16ab7a37cd0c2f13102e422e6d35"
+  version "2.1.13"
+  resolved "https://registry.npmjs.org/npm-publish-git-tag/-/npm-publish-git-tag-2.1.13.tgz#f876d063fd86f1460b8329af4c109c6a3c6436e8"
   dependencies:
     bluebird "^3.5.0"
     commander "^2.9.0"
