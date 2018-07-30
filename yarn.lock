@@ -655,29 +655,29 @@ conventional-changelog-angular@^5.0.0:
     compare-func "^1.3.1"
     q "^1.5.1"
 
-conventional-changelog-atom@^0.2.8:
-  version "0.2.8"
-  resolved "https://registry.npmjs.org/conventional-changelog-atom/-/conventional-changelog-atom-0.2.8.tgz#8037693455990e3256f297320a45fa47ee553a14"
+conventional-changelog-atom@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-atom/-/conventional-changelog-atom-2.0.0.tgz#cd6453469cfb8fc345af3391b92990251c95558b"
   dependencies:
     q "^1.5.1"
 
-conventional-changelog-codemirror@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.npmjs.org/conventional-changelog-codemirror/-/conventional-changelog-codemirror-0.3.8.tgz#a1982c8291f4ee4d6f2f62817c6b2ecd2c4b7b47"
+conventional-changelog-codemirror@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-codemirror/-/conventional-changelog-codemirror-2.0.0.tgz#bfb61ccabacdd3bf8425a5cbe92276c86c5a0c1e"
   dependencies:
     q "^1.5.1"
 
-conventional-changelog-core@^2.0.11:
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/conventional-changelog-core/-/conventional-changelog-core-2.0.11.tgz#19b5fbd55a9697773ed6661f4e32030ed7e30287"
+conventional-changelog-core@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-core/-/conventional-changelog-core-3.0.0.tgz#228bc97f436bbdde3fd6009557d16ce04497512c"
   dependencies:
-    conventional-changelog-writer "^3.0.9"
-    conventional-commits-parser "^2.1.7"
+    conventional-changelog-writer "^4.0.0"
+    conventional-commits-parser "^3.0.0"
     dateformat "^3.0.0"
     get-pkg-repo "^1.0.0"
-    git-raw-commits "^1.3.6"
+    git-raw-commits "^2.0.0"
     git-remote-origin-url "^2.0.0"
-    git-semver-tags "^1.3.6"
+    git-semver-tags "^2.0.0"
     lodash "^4.2.1"
     normalize-package-data "^2.3.5"
     q "^1.5.1"
@@ -685,21 +685,21 @@ conventional-changelog-core@^2.0.11:
     read-pkg-up "^1.0.1"
     through2 "^2.0.0"
 
-conventional-changelog-ember@^0.3.12:
-  version "0.3.12"
-  resolved "https://registry.npmjs.org/conventional-changelog-ember/-/conventional-changelog-ember-0.3.12.tgz#b7d31851756d0fcb49b031dffeb6afa93b202400"
+conventional-changelog-ember@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-ember/-/conventional-changelog-ember-2.0.0.tgz#4104571fc8871bcf08501a3d5252b25d1a9a070c"
   dependencies:
     q "^1.5.1"
 
-conventional-changelog-eslint@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.npmjs.org/conventional-changelog-eslint/-/conventional-changelog-eslint-1.0.9.tgz#b13cc7e4b472c819450ede031ff1a75c0e3d07d3"
+conventional-changelog-eslint@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-eslint/-/conventional-changelog-eslint-3.0.0.tgz#cc5376cb29a622c1ade197e155bf054640c05cd3"
   dependencies:
     q "^1.5.1"
 
-conventional-changelog-express@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.npmjs.org/conventional-changelog-express/-/conventional-changelog-express-0.3.6.tgz#4a6295cb11785059fb09202180d0e59c358b9c2c"
+conventional-changelog-express@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-express/-/conventional-changelog-express-2.0.0.tgz#d3d020118fbfce21a75e025ec097101e355a2361"
   dependencies:
     q "^1.5.1"
 
@@ -715,27 +715,23 @@ conventional-changelog-jscs@^0.1.0:
   dependencies:
     q "^1.4.1"
 
-conventional-changelog-jshint@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.npmjs.org/conventional-changelog-jshint/-/conventional-changelog-jshint-0.3.8.tgz#9051c1ac0767abaf62a31f74d2fe8790e8acc6c8"
+conventional-changelog-jshint@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-jshint/-/conventional-changelog-jshint-2.0.0.tgz#7a038330f485082e489f47f5d07539036949f87d"
   dependencies:
     compare-func "^1.3.1"
     q "^1.5.1"
-
-conventional-changelog-preset-loader@^1.1.8:
-  version "1.1.8"
-  resolved "https://registry.npmjs.org/conventional-changelog-preset-loader/-/conventional-changelog-preset-loader-1.1.8.tgz#40bb0f142cd27d16839ec6c74ee8db418099b373"
 
 conventional-changelog-preset-loader@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/conventional-changelog-preset-loader/-/conventional-changelog-preset-loader-2.0.0.tgz#69fea3db554d9b2a95dcaf7c603c1a0a389a7603"
 
-conventional-changelog-writer@^3.0.9:
-  version "3.0.9"
-  resolved "https://registry.npmjs.org/conventional-changelog-writer/-/conventional-changelog-writer-3.0.9.tgz#4aecdfef33ff2a53bb0cf3b8071ce21f0e994634"
+conventional-changelog-writer@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-writer/-/conventional-changelog-writer-4.0.0.tgz#3ed983c8ef6a3aa51fe44e82c9c75e86f1b5aa42"
   dependencies:
     compare-func "^1.3.1"
-    conventional-commits-filter "^1.1.6"
+    conventional-commits-filter "^2.0.0"
     dateformat "^3.0.0"
     handlebars "^4.0.2"
     json-stringify-safe "^5.0.1"
@@ -745,21 +741,21 @@ conventional-changelog-writer@^3.0.9:
     split "^1.0.0"
     through2 "^2.0.0"
 
-conventional-changelog@^1.1.0:
-  version "1.1.24"
-  resolved "https://registry.npmjs.org/conventional-changelog/-/conventional-changelog-1.1.24.tgz#3d94c29c960f5261c002678315b756cdd3d7d1f0"
+conventional-changelog@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/conventional-changelog/-/conventional-changelog-2.0.1.tgz#0d8f0f9668eaeaa5edd612896e7f3cc4385b31c9"
   dependencies:
     conventional-changelog-angular "^1.6.6"
-    conventional-changelog-atom "^0.2.8"
-    conventional-changelog-codemirror "^0.3.8"
-    conventional-changelog-core "^2.0.11"
-    conventional-changelog-ember "^0.3.12"
-    conventional-changelog-eslint "^1.0.9"
-    conventional-changelog-express "^0.3.6"
+    conventional-changelog-atom "^2.0.0"
+    conventional-changelog-codemirror "^2.0.0"
+    conventional-changelog-core "^3.0.0"
+    conventional-changelog-ember "^2.0.0"
+    conventional-changelog-eslint "^3.0.0"
+    conventional-changelog-express "^2.0.0"
     conventional-changelog-jquery "^0.1.0"
     conventional-changelog-jscs "^0.1.0"
-    conventional-changelog-jshint "^0.3.8"
-    conventional-changelog-preset-loader "^1.1.8"
+    conventional-changelog-jshint "^2.0.0"
+    conventional-changelog-preset-loader "^2.0.0"
 
 conventional-commits-detector@^0.1.1:
   version "0.1.1"
@@ -770,31 +766,12 @@ conventional-commits-detector@^0.1.1:
     meow "^3.3.0"
     through2-concurrent "^1.1.0"
 
-conventional-commits-filter@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.npmjs.org/conventional-commits-filter/-/conventional-commits-filter-1.1.6.tgz#4389cd8e58fe89750c0b5fb58f1d7f0cc8ad3831"
-  dependencies:
-    is-subset "^0.1.1"
-    modify-values "^1.0.0"
-
 conventional-commits-filter@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/conventional-commits-filter/-/conventional-commits-filter-2.0.0.tgz#a0ce1d1ff7a1dd7fab36bee8e8256d348d135651"
   dependencies:
     is-subset "^0.1.1"
     modify-values "^1.0.0"
-
-conventional-commits-parser@^2.1.7:
-  version "2.1.7"
-  resolved "https://registry.npmjs.org/conventional-commits-parser/-/conventional-commits-parser-2.1.7.tgz#eca45ed6140d72ba9722ee4132674d639e644e8e"
-  dependencies:
-    JSONStream "^1.0.4"
-    is-text-path "^1.0.0"
-    lodash "^4.2.1"
-    meow "^4.0.0"
-    split2 "^2.0.0"
-    through2 "^2.0.0"
-    trim-off-newlines "^1.0.0"
 
 conventional-commits-parser@^3.0.0:
   version "3.0.0"
@@ -808,20 +785,21 @@ conventional-commits-parser@^3.0.0:
     through2 "^2.0.0"
     trim-off-newlines "^1.0.0"
 
-conventional-github-releaser@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/conventional-github-releaser/-/conventional-github-releaser-2.0.2.tgz#25d24c91848b1b7554aa9bda7c55d8a12bc77ad3"
+conventional-github-releaser@^3.0.0:
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/conventional-github-releaser/-/conventional-github-releaser-3.1.2.tgz#c98ac86efb3caa0db0a2f7f039cc65d42ef535af"
   dependencies:
-    conventional-changelog "^1.1.0"
+    conventional-changelog "^2.0.0"
     dateformat "^3.0.0"
-    gh-got "^6.0.0"
-    git-semver-tags "^1.0.0"
+    debug "^3.1.0"
+    gh-got "^7.0.0"
+    git-semver-tags "^2.0.0"
     lodash.merge "^4.0.2"
-    meow "^4.0.0"
+    meow "^5.0.0"
     object-assign "^4.0.1"
     q "^1.4.1"
     semver "^5.0.1"
-    semver-regex "^1.0.0"
+    semver-regex "^2.0.0"
     through2 "^2.0.0"
 
 conventional-recommended-bump@^4.0.0:
@@ -935,7 +913,7 @@ decode-uri-component@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
 
-decompress-response@^3.2.0, decompress-response@^3.3.0:
+decompress-response@^3.3.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/decompress-response/-/decompress-response-3.3.0.tgz#80a4dd323748384bfa248083622aedec982adff3"
   dependencies:
@@ -1048,10 +1026,11 @@ duplexer3@^0.1.4:
   resolved "https://registry.npmjs.org/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
 
 ecc-jsbn@~0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
   dependencies:
     jsbn "~0.1.0"
+    safer-buffer "^2.1.0"
 
 ecdsa-sig-formatter@1.0.10:
   version "1.0.10"
@@ -1494,13 +1473,6 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gh-got@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/gh-got/-/gh-got-6.0.0.tgz#d74353004c6ec466647520a10bd46f7299d268d0"
-  dependencies:
-    got "^7.0.0"
-    is-plain-obj "^1.1.0"
-
 gh-got@^7.0.0:
   version "7.0.0"
   resolved "https://registry.npmjs.org/gh-got/-/gh-got-7.0.0.tgz#f6cce302e850327ed2d11c00080c56656f1e2432"
@@ -1525,16 +1497,6 @@ git-raw-commits@^0.1.2:
     split2 "^1.0.0"
     through2 "^2.0.0"
 
-git-raw-commits@^1.3.6:
-  version "1.3.6"
-  resolved "https://registry.npmjs.org/git-raw-commits/-/git-raw-commits-1.3.6.tgz#27c35a32a67777c1ecd412a239a6c19d71b95aff"
-  dependencies:
-    dargs "^4.0.1"
-    lodash.template "^4.0.2"
-    meow "^4.0.0"
-    split2 "^2.0.0"
-    through2 "^2.0.0"
-
 git-raw-commits@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/git-raw-commits/-/git-raw-commits-2.0.0.tgz#d92addf74440c14bcc5c83ecce3fb7f8a79118b5"
@@ -1552,7 +1514,7 @@ git-remote-origin-url@^2.0.0:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
 
-git-semver-tags@^1.0.0, git-semver-tags@^1.1.2, git-semver-tags@^1.3.6:
+git-semver-tags@^1.1.2:
   version "1.3.6"
   resolved "https://registry.npmjs.org/git-semver-tags/-/git-semver-tags-1.3.6.tgz#357ea01f7280794fe0927f2806bee6414d2caba5"
   dependencies:
@@ -1597,25 +1559,6 @@ globby@^5.0.0:
     object-assign "^4.0.1"
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
-
-got@^7.0.0:
-  version "7.1.0"
-  resolved "https://registry.npmjs.org/got/-/got-7.1.0.tgz#05450fd84094e6bbea56f451a43a9c289166385a"
-  dependencies:
-    decompress-response "^3.2.0"
-    duplexer3 "^0.1.4"
-    get-stream "^3.0.0"
-    is-plain-obj "^1.1.0"
-    is-retry-allowed "^1.0.0"
-    is-stream "^1.0.0"
-    isurl "^1.0.0-alpha5"
-    lowercase-keys "^1.0.0"
-    p-cancelable "^0.3.0"
-    p-timeout "^1.1.1"
-    safe-buffer "^5.0.1"
-    timed-out "^4.0.0"
-    url-parse-lax "^1.0.0"
-    url-to-options "^1.0.1"
 
 got@^8.0.0, got@^8.3.0:
   version "8.3.2"
@@ -1862,9 +1805,9 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
-ipaddr.js@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.6.0.tgz#e3fa357b773da619f26e95f049d055c72796f86b"
+ipaddr.js@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.8.0.tgz#eaa33d6ddd7ace8f7f6fe0c9ca0440e706738b1e"
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
@@ -2008,7 +1951,7 @@ is-resolvable@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/is-resolvable/-/is-resolvable-1.1.0.tgz#fb18f87ce1feb925169c9a407c19318a3206ed88"
 
-is-retry-allowed@^1.0.0, is-retry-allowed@^1.1.0:
+is-retry-allowed@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/is-retry-allowed/-/is-retry-allowed-1.1.0.tgz#11a060568b67339444033d0125a61a20d564fb34"
 
@@ -2018,7 +1961,7 @@ is-scoped@^1.0.0:
   dependencies:
     scoped-regex "^1.0.0"
 
-is-stream@^1.0.0, is-stream@^1.1.0:
+is-stream@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
 
@@ -2089,8 +2032,8 @@ istanbul-lib-hook@^1.1.0:
     append-transform "^0.4.0"
 
 istanbul-lib-instrument@^2.1.0:
-  version "2.3.1"
-  resolved "https://registry.npmjs.org/istanbul-lib-instrument/-/istanbul-lib-instrument-2.3.1.tgz#406406730a395acb2e50f0d98137ace16bd4a970"
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/istanbul-lib-instrument/-/istanbul-lib-instrument-2.3.2.tgz#b287cbae2b5f65f3567b05e2e29b275eaf92d25e"
   dependencies:
     "@babel/generator" "7.0.0-beta.51"
     "@babel/parser" "7.0.0-beta.51"
@@ -2546,6 +2489,20 @@ meow@^4.0.0:
     redent "^2.0.0"
     trim-newlines "^2.0.0"
 
+meow@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/meow/-/meow-5.0.0.tgz#dfc73d63a9afc714a5e371760eb5c88b91078aa4"
+  dependencies:
+    camelcase-keys "^4.0.0"
+    decamelize-keys "^1.0.0"
+    loud-rejection "^1.0.0"
+    minimist-options "^3.0.1"
+    normalize-package-data "^2.3.4"
+    read-pkg-up "^3.0.0"
+    redent "^2.0.0"
+    trim-newlines "^2.0.0"
+    yargs-parser "^10.0.0"
+
 merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
@@ -2725,8 +2682,8 @@ nise@^1.4.2:
     text-encoding "^0.6.4"
 
 nock@^9.1.4:
-  version "9.4.2"
-  resolved "https://registry.npmjs.org/nock/-/nock-9.4.2.tgz#bab58a44b5781bdb74d7808673a2dbeefafb898d"
+  version "9.4.3"
+  resolved "https://registry.npmjs.org/nock/-/nock-9.4.3.tgz#26bbc1280898f442c9814085f05199cab857a04c"
   dependencies:
     chai "^4.1.2"
     debug "^3.1.0"
@@ -2756,8 +2713,8 @@ normalize-url@2.0.1:
     sort-keys "^2.0.0"
 
 npm-publish-git-tag@^2.0.0:
-  version "2.1.14"
-  resolved "https://registry.npmjs.org/npm-publish-git-tag/-/npm-publish-git-tag-2.1.14.tgz#1c358e1e9368156de22a000bdcb5947655693935"
+  version "2.1.15"
+  resolved "https://registry.npmjs.org/npm-publish-git-tag/-/npm-publish-git-tag-2.1.15.tgz#251d2daa62df0cdb72a1b2e34e12d11a8124035a"
   dependencies:
     bluebird "^3.5.0"
     commander "^2.9.0"
@@ -2894,10 +2851,6 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
-p-cancelable@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmjs.org/p-cancelable/-/p-cancelable-0.3.0.tgz#b9e123800bcebb7ac13a479be195b507b98d30fa"
-
 p-cancelable@^0.4.0:
   version "0.4.1"
   resolved "https://registry.npmjs.org/p-cancelable/-/p-cancelable-0.4.1.tgz#35f363d67d52081c8d9585e37bcceb7e0bbcb2a0"
@@ -2921,12 +2874,6 @@ p-locate@^2.0.0:
   resolved "https://registry.npmjs.org/p-locate/-/p-locate-2.0.0.tgz#20a0103b222a70c8fd39cc2e580680f3dde5ec43"
   dependencies:
     p-limit "^1.1.0"
-
-p-timeout@^1.1.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/p-timeout/-/p-timeout-1.2.1.tgz#5eb3b353b7fce99f101a1038880bb054ebbea386"
-  dependencies:
-    p-finally "^1.0.0"
 
 p-timeout@^2.0.1:
   version "2.0.1"
@@ -3063,10 +3010,6 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
-prepend-http@^1.0.1:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
-
 prepend-http@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
@@ -3088,11 +3031,11 @@ propagate@^1.0.0:
   resolved "https://registry.npmjs.org/propagate/-/propagate-1.0.0.tgz#00c2daeedda20e87e3782b344adba1cddd6ad709"
 
 proxy-addr@~2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.3.tgz#355f262505a621646b3130a728eb647e22055341"
+  version "2.0.4"
+  resolved "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.4.tgz#ecfc733bf22ff8c6f407fa275327b9ab67e48b93"
   dependencies:
     forwarded "~0.1.2"
-    ipaddr.js "1.6.0"
+    ipaddr.js "1.8.0"
 
 pseudomap@^1.0.2:
   version "1.0.2"
@@ -3424,7 +3367,7 @@ safe-regex@^1.1.0:
   dependencies:
     ret "~0.1.10"
 
-"safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.0.2:
+"safer-buffer@>= 2.1.2 < 3", safer-buffer@^2.0.2, safer-buffer@^2.1.0:
   version "2.1.2"
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
@@ -3437,8 +3380,8 @@ scoped-regex@^1.0.0:
   resolved "https://registry.npmjs.org/scoped-regex/-/scoped-regex-1.0.0.tgz#a346bb1acd4207ae70bd7c0c7ca9e566b6baddb8"
 
 semantic-release-github-notifier@^7.0.0:
-  version "7.0.15"
-  resolved "https://registry.npmjs.org/semantic-release-github-notifier/-/semantic-release-github-notifier-7.0.15.tgz#c65b61af56e00ee338da82adb537448ad12b916d"
+  version "7.0.17"
+  resolved "https://registry.npmjs.org/semantic-release-github-notifier/-/semantic-release-github-notifier-7.0.17.tgz#c574e42bb60993a427fd873c3f789117d57903d9"
   dependencies:
     bluebird "^3.4.1"
     conventional-commits-parser "^3.0.0"
@@ -3450,19 +3393,19 @@ semantic-release-github-notifier@^7.0.0:
     stream-array "^1.1.2"
     through2 "^2.0.1"
 
-semantic-release-github-releaser@^5.0.0:
-  version "5.0.25"
-  resolved "https://registry.npmjs.org/semantic-release-github-releaser/-/semantic-release-github-releaser-5.0.25.tgz#82570f4e6c748430f5f5f0fb3a1f66dee779874f"
+semantic-release-github-releaser@^6.0.0:
+  version "6.0.14"
+  resolved "https://registry.npmjs.org/semantic-release-github-releaser/-/semantic-release-github-releaser-6.0.14.tgz#4a5c333afcd5f76bffd7878f01c0e167f728541b"
   dependencies:
     bluebird "^3.3.4"
-    conventional-github-releaser "^2.0.0"
+    conventional-github-releaser "^3.0.0"
     debug "^3.0.0"
     get-pkg-repo "^2.0.0"
     lodash "^4.0.1"
 
 semantic-release-github@^4.0.0:
-  version "4.0.13"
-  resolved "https://registry.npmjs.org/semantic-release-github/-/semantic-release-github-4.0.13.tgz#a875df6b645af60f353d6ec7df6699a71e497f78"
+  version "4.0.17"
+  resolved "https://registry.npmjs.org/semantic-release-github/-/semantic-release-github-4.0.17.tgz#46ac07b122ff83f7159ac1bc8670eae0ca972e52"
   dependencies:
     bluebird "^3.3.4"
     commander "^2.9.0"
@@ -3474,15 +3417,15 @@ semantic-release-github@^4.0.0:
     git-raw-commits "^2.0.0"
     lodash "^4.7.0"
     semantic-release-github-notifier "^7.0.0"
-    semantic-release-github-releaser "^5.0.0"
+    semantic-release-github-releaser "^6.0.0"
     semver "^5.1.0"
     shelljs "^0.8.0"
-    shifted-semver-increment "^1.0.3"
+    shifted-semver-increment "^2.0.0"
     stream-to-array "^2.3.0"
 
-semver-regex@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/semver-regex/-/semver-regex-1.0.0.tgz#92a4969065f9c70c694753d55248fc68f8f652c9"
+semver-regex@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/semver-regex/-/semver-regex-2.0.0.tgz#a93c2c5844539a770233379107b38c7b4ac9d338"
 
 "semver@2 || 3 || 4 || 5", semver@^5.0.1, semver@^5.1.0, semver@^5.3.0, semver@^5.4.1, semver@^5.5.0:
   version "5.5.0"
@@ -3571,9 +3514,9 @@ shelljs@^0.8.0, shelljs@^0.8.1:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shifted-semver-increment@^1.0.3:
-  version "1.0.23"
-  resolved "https://registry.npmjs.org/shifted-semver-increment/-/shifted-semver-increment-1.0.23.tgz#9bface1d6617bb8255ab27eaa5d1f29ff3779bf5"
+shifted-semver-increment@^2.0.0:
+  version "2.0.12"
+  resolved "https://registry.npmjs.org/shifted-semver-increment/-/shifted-semver-increment-2.0.12.tgz#e135ba3f797bbbc6a77140746929221f6ab4776f"
   dependencies:
     debug "^3.1.0"
     semver "^5.4.1"
@@ -3928,7 +3871,7 @@ through@2, "through@>=2.2.7 <3", through@^2.3.6:
   version "2.3.8"
   resolved "https://registry.npmjs.org/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
-timed-out@^4.0.0, timed-out@^4.0.1:
+timed-out@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npmjs.org/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
 
@@ -4059,12 +4002,6 @@ uri-js@^4.2.1:
 urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
-
-url-parse-lax@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/url-parse-lax/-/url-parse-lax-1.0.0.tgz#7af8f303645e9bd79a272e7a14ac68bc0609da73"
-  dependencies:
-    prepend-http "^1.0.1"
 
 url-parse-lax@^3.0.0:
   version "3.0.0"
@@ -4209,6 +4146,12 @@ y18n@^3.2.1:
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
+
+yargs-parser@^10.0.0:
+  version "10.1.0"
+  resolved "https://registry.npmjs.org/yargs-parser/-/yargs-parser-10.1.0.tgz#7202265b89f7e9e9f2e5765e0fe735a905edbaa8"
+  dependencies:
+    camelcase "^4.1.0"
 
 yargs-parser@^8.0.0:
   version "8.1.0"
