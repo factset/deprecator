@@ -128,7 +128,7 @@ describe(`rules`, () => {
     });
 
     it(`should return false for old minor versions when all their successors are within the allowed time range`, () => {
-      [`2.0.0`, `2.1.0`, `2.1.1`].forEach(function (version) {
+      [`2.0.0`, `2.1.0`, `2.1.1`].forEach(version => {
         packageRegistryMetadataMinorVersionsBeforeSuccessor.time[version] = monthsAgo(MONTHS - 1);
       });
       packageRegistryMetadataMinorVersionsBeforeSuccessor.time[`2.2.0`] = monthsAgo(MONTHS - 1);
@@ -288,7 +288,7 @@ describe(`npm`, function () {
       date.setMonth(date.getMonth() - 7);
 
       const modifiedMetadata = Object.assign({}, packageRegistryMetadata);
-      Object.keys(modifiedMetadata.time).forEach(function (version) {
+      Object.keys(modifiedMetadata.time).forEach(version => {
         modifiedMetadata.time[version] = date.toISOString();
       });
 

@@ -54,11 +54,12 @@
     "tmp": "^0.0.33"
   },
   "devDependencies": {
+    "@hbetts/eslint-config": "^1.0.2",
+    "@hbetts/nyc-config": "^1.0.13",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "codecov": "^3.0.0",
     "eslint": "^5.0.0",
-    "eslint-config-xo-space": "^0.19.0",
     "mocha": "^5.0.0",
     "nock": "^9.1.4",
     "npm-publish-git-tag": "^2.0.0",

@@ -48,7 +48,9 @@ describe(`projects`, function () {
       this.packageManagers = [];
 
       this.mockNpm = sinon.stub();
-      this.mockNpm.returns(function () {});
+      this.mockNpm.returns(function () {
+        this.temp = 0;
+      });
 
       this.packageManagers.push({
         manager: this.mockNpm,
