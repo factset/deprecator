@@ -2,7 +2,7 @@
   "author": {
     "name": "Hutson Betts",
     "email": "hbetts@factset.com",
-    "url": "https://github.com/destroyerofbuilds"
+    "url": "https://github.com/hbetts"
   },
   "bin": "./src/cli.js",
   "bugs": "https://github.com/factset/deprecator/issues",
