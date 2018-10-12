@@ -54,6 +54,7 @@
     "tmp": "^0.0.33"
   },
   "devDependencies": {
+    "@hbetts/conventional-changelog-config": "^1.0.0",
     "@hbetts/eslint-config": "^1.0.2",
     "@hbetts/nyc-config": "^1.0.13",
     "chai": "^4.1.2",
