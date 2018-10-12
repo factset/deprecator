@@ -6,7 +6,7 @@ const chai = require(`chai`);
 const chaiAsPromised = require(`chai-as-promised`);
 const fs = require(`fs`);
 const index = require(`./index`).deprecator;
-const mocha = require(`mocha`);
+const {afterEach, before, beforeEach, describe, it} = require(`mocha`);
 const nock = require(`nock`);
 const path = require(`path`);
 const sinon = require(`sinon`);
@@ -15,13 +15,7 @@ const tmp = require(`tmp`);
 
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
-const expect = chai.expect;
-
-const afterEach = mocha.afterEach;
-const before = mocha.before;
-const beforeEach = mocha.beforeEach;
-const describe = mocha.describe;
-const it = mocha.it;
+const {expect} = chai;
 
 describe(`deprecator`, function () {
   // Setting up our fake project takes longer than the default Mocha timeout.

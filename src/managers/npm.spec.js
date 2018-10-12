@@ -4,10 +4,10 @@
 
 const chai = require(`chai`);
 const chaiAsPromised = require(`chai-as-promised`);
-const mocha = require(`mocha`);
+const {before, beforeEach, describe, it} = require(`mocha`);
 const nock = require(`nock`);
-const npm = require(`./npm`).npm;
-const rules = require(`./npm`).rules;
+const {npm} = require(`./npm`);
+const {rules} = require(`./npm`);
 const sinon = require(`sinon`);
 const sinonChai = require(`sinon-chai`);
 const packageRegistryMetadata = require(`../mock/package-registry.mock.json`);
@@ -17,14 +17,9 @@ const packageMetadata = require(`../mock/package.mock.json`);
 
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
-const expect = chai.expect;
+const {expect} = chai;
 
 const MONTHS = 6;
-
-const before = mocha.before;
-const beforeEach = mocha.beforeEach;
-const describe = mocha.describe;
-const it = mocha.it;
 
 function monthsAgo(months) {
   const date = new Date();

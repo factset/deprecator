@@ -5,7 +5,7 @@
 const chai = require(`chai`);
 const chaiAsPromised = require(`chai-as-promised`);
 const fs = require(`fs`);
-const mocha = require(`mocha`);
+const {afterEach, beforeEach, describe, it} = require(`mocha`);
 const projects = require(`./projects`);
 const projectsFactory = require(`./projects`).projects;
 const sinon = require(`sinon`);
@@ -14,12 +14,7 @@ const tmp = require(`tmp`);
 
 chai.use(chaiAsPromised);
 chai.use(sinonChai);
-const expect = chai.expect;
-
-const afterEach = mocha.afterEach;
-const beforeEach = mocha.beforeEach;
-const describe = mocha.describe;
-const it = mocha.it;
+const {expect} = chai;
 
 describe(`projects`, function () {
   // Setting up our fake project takes longer than the default Mocha timeout.

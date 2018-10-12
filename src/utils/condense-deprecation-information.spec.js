@@ -2,14 +2,9 @@
 
 /* eslint-disable no-unused-expressions */
 
-const chai = require(`chai`);
+const {expect} = require(`chai`);
 const condenseDeprecationInformation = require(`./condense-deprecation-information`);
-const mocha = require(`mocha`);
-
-const expect = chai.expect;
-
-const describe = mocha.describe;
-const it = mocha.it;
+const {describe, it} = require(`mocha`);
 
 describe(`condense-deprecation-information`, () => {
   it(`should return empty object`, () => {

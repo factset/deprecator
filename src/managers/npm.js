@@ -122,7 +122,7 @@ function getRules() {
     },
 
     patchVersions: metadata /* , monthsPassed */ => {
-      const latest = metadata[`dist-tags`].latest;
+      const {latest} = metadata[`dist-tags`];
 
       debug(`latest 'dist-tag' version is ${latest}`);
 

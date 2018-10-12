@@ -2,12 +2,14 @@
 
 // Process our repository queue.
 
-const createInstallationToken = require(`./platforms/github`).createInstallationToken;
-const getApplicationID = require(`./platforms/github`).getApplicationID;
-const getApplicationKey = require(`./platforms/github`).getApplicationKey;
-const createApplicationToken = require(`./platforms/github`).createApplicationToken;
-const getEndpoint = require(`./platforms/github`).getEndpoint;
-const getRateLimitRemaining = require(`./platforms/github`).getRateLimitRemaining;
+const {
+  createInstallationToken,
+  getApplicationID,
+  getApplicationKey,
+  createApplicationToken,
+  getEndpoint,
+  getRateLimitRemaining,
+} = require(`./platforms/github`);
 const index = require(`./index`);
 const redis = require(`redis`);
 const RSMQWorker = require(`rsmq-worker`);

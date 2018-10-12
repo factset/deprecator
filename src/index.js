@@ -3,7 +3,7 @@
 const condenseDeprecationInformation = require(`./utils/condense-deprecation-information`);
 const debug = require(`debug`)(`deprecator`);
 const lodash = require(`lodash`);
-const projects = require(`./utils/projects`).projects;
+const {projects} = require(`./utils/projects`);
 const shelljs = require(`shelljs`);
 
 module.exports = deprecator();

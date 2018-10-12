@@ -4,12 +4,14 @@
 
 const bluebird = require(`bluebird`);
 const debug = require(`debug`)(`deprecator`);
-const fetchInstallations = require(`./platforms/github`).fetchInstallations;
-const fetchInstallationRepositories = require(`./platforms/github`).fetchInstallationRepositories;
-const getApplicationID = require(`./platforms/github`).getApplicationID;
-const getApplicationKey = require(`./platforms/github`).getApplicationKey;
-const createApplicationToken = require(`./platforms/github`).createApplicationToken;
-const getEndpoint = require(`./platforms/github`).getEndpoint;
+const {
+  fetchInstallations,
+  fetchInstallationRepositories,
+  getApplicationID,
+  getApplicationKey,
+  createApplicationToken,
+  getEndpoint,
+} = require(`./platforms/github`);
 const redis = require(`redis`);
 const RSMQWorker = require(`rsmq-worker`);
 
