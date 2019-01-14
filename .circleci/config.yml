@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  release-workflows: hutson/library-release-workflows@4.3.3
+
 test_plan: &test_plan
   steps:
     - checkout
@@ -55,7 +58,6 @@ workflows:
   deploy:
     jobs:
       - release-workflows/npm-deploy:
-          access: public
           context: package-publishing
           filters:
             tags:
