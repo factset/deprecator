@@ -2,7 +2,6 @@
 
 [![CircleCI](https://circleci.com/gh/factset/deprecator.svg?style=svg)](https://circleci.com/gh/factset/deprecator)
 [![codecov](https://codecov.io/gh/factset/deprecator/branch/master/graph/badge.svg)](https://codecov.io/gh/factset/deprecator)
-[![Gitter](https://badges.gitter.im/factset/deprecator.svg)](https://gitter.im/factset/deprecator?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 > Deprecate npm package versions based on rule matching.
 
