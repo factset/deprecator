@@ -1,3 +1,7 @@
+# Archived
+
+This repository is not being actively maintained, and has been archived.
+
 # deprecator
 
 [![CircleCI](https://circleci.com/gh/factset/deprecator.svg?style=svg)](https://circleci.com/gh/factset/deprecator)
