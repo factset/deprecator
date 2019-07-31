@@ -31,7 +31,9 @@
     "start": "node src/server.js",
     "schedule": "node src/scheduler.js",
     "test": "eslint src/ && nyc mocha --opts mocha.opts src/**/*.spec.js",
-    "worker": "node src/worker.js"
+    "worker": "node src/worker.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "version": "1.0.0",
   "dependencies": {
@@ -51,7 +53,8 @@
     "semver": "^5.5.0",
     "shelljs": "^0.8.1",
     "throng": "^4.0.0",
-    "tmp": "^0.0.33"
+    "tmp": "^0.0.33",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@hbetts/eslint-config": "^2.0.0",
@@ -65,5 +68,6 @@
     "nyc": "^13.0.0",
     "sinon": "^7.0.0",
     "sinon-chai": "^3.0.0"
-  }
+  },
+  "snyk": true
 }
